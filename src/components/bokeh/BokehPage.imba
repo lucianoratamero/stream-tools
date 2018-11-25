@@ -11,7 +11,6 @@ export tag BokehPage
     @colorPalette[Math.floor Math.random * @colorPalette:length]
 
   def generateCircles
-    log @colorPalette
     while @numberOfCircles
 
       @numberOfCircles = @numberOfCircles - 1
