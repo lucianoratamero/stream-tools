@@ -4,21 +4,27 @@ import './BokehPage.scss'
 
 export tag BokehPage < canvas
 
+  prop decay # recommended: anything between 0.6 and 1.6
+  prop framesPerSecond default: 60
   prop currentNodes default: []
   prop numberOfCircles default: (window:innerWidth / window:innerHeight) * 100
-  prop colorPalette default: ['red']
+  prop colorPalette default: ['#ff0000']
 
   def context type = '2d'
     dom.getContext type
 
+  def setup
+    if !@decay
+      decay = (60 / @framesPerSecond) * 1
+
   def mount
-    schedule(interval: 16)
+    schedule(interval: 1000 / @framesPerSecond)
 
   def tick
     @currentNodes = @currentNodes.filter do |node| node:opacity > 0
     for node in @currentNodes
-      node:size = node:size + (window:innerWidth / window:innerHeight)
-      node:opacity = (1 - (node:size / 200)) / 2
+      node:size = node:size + (window:innerWidth / window:innerHeight) * @decay
+      node:opacity = (1 - (node:size * @decay / 200)) / 2
     context.clearRect 0, 0, dom:width, dom:height
     render
 
@@ -27,7 +33,7 @@ export tag BokehPage < canvas
 
   def render
     <self height=window:innerHeight width=window:innerWidth>
-      if @currentNodes:length < @numberOfCircles && Math.random > 0.8
+      if @currentNodes:length < @numberOfCircles && Math.random > 0.5
         @currentNodes.push {
           size: 1,
           opacity: 1,
