@@ -8,6 +8,7 @@ export tag Bokeh
 
   prop showForm default: true
   prop decay default: 0.4
+  prop spawningChance
   prop colorPalette default: colorPalettes[Math.floor Math.random * 1000]
 
   def changePalette
@@ -17,7 +18,6 @@ export tag Bokeh
     @showForm = !@showForm
 
   def goFullscreen
-    @showForm = false
     if (document:fullScreenElement && document:fullScreenElement) !== null || !document.mozFullScreen && !document.webkitIsFullScreen
       if document:documentElement:requestFullScreen
         document:documentElement.requestFullScreen

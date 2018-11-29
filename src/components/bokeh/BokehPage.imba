@@ -4,10 +4,11 @@ import './BokehPage.scss'
 
 export tag BokehPage < canvas
 
+  prop spawningChance
   prop decay default: 0.4 # recommended: anything between 0.6 and 1.6
   prop framesPerSecond default: 60
   prop currentNodes default: []
-  prop numberOfCircles default: (window:innerWidth / window:innerHeight) * 100
+  prop numberOfCircles default: (window:innerWidth / window:innerHeight) * 200
   prop colorPalette default: ['#ff0000']
 
   def context type = '2d'
@@ -16,8 +17,12 @@ export tag BokehPage < canvas
   def setup
     if !@decay
       decay = (60 / @framesPerSecond) * 1
-    if @params && @params:decay
-      decay = Number @params:decay
+
+    if !@spawningChance
+      if @decay > 1
+        @spawningChance = 1
+      else
+        @spawningChance = @decay * 0.5
 
   def mount
     schedule(interval: 1000 / @framesPerSecond)
@@ -46,7 +51,7 @@ export tag BokehPage < canvas
 
   def render
     <self height=window:innerHeight width=window:innerWidth>
-      if @currentNodes:length < @numberOfCircles && Math.random > 0.75
+      if @currentNodes:length < @numberOfCircles && Math.random < @spawningChance
         @currentNodes.push {
           size: 1,
           opacity: 1,
