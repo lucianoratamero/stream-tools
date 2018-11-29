@@ -3,6 +3,17 @@
   position: absolute;
   overflow: hidden; }
 
+form {
+  position: fixed;
+  right: 1em;
+  top: 1em;
+  z-index: 99999;
+  padding: 1em;
+  background: white; }
+
+.hidden {
+  display: none !important; }
+
 html, body {
   margin: 0; }
 
