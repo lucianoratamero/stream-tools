@@ -4,7 +4,7 @@ import './BokehPage.scss'
 
 export tag BokehPage < canvas
 
-  prop decay # recommended: anything between 0.6 and 1.6
+  prop decay default: 0.4 # recommended: anything between 0.6 and 1.6
   prop framesPerSecond default: 60
   prop currentNodes default: []
   prop numberOfCircles default: (window:innerWidth / window:innerHeight) * 100
@@ -16,6 +16,8 @@ export tag BokehPage < canvas
   def setup
     if !@decay
       decay = (60 / @framesPerSecond) * 1
+    if @params && @params:decay
+      decay = Number @params:decay
 
   def mount
     schedule(interval: 1000 / @framesPerSecond)
