@@ -1,7 +1,5 @@
 .BokehPage {
-  height: 100%;
-  width: 100%;
-  background: #000;
+  background: #222;
   position: absolute;
   overflow: hidden; }
 
