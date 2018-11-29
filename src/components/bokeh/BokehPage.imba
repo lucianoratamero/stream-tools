@@ -22,11 +22,22 @@ export tag BokehPage < canvas
 
   def tick
     @currentNodes = @currentNodes.filter do |node| node:opacity > 0
+
     for node in @currentNodes
       node:size = node:size + (window:innerWidth / window:innerHeight) * @decay
-      node:opacity = (1 - (node:size * @decay / 200)) / 2
+      node:opacity = (1 - (node:size * @decay / 200))
+
     context.clearRect 0, 0, dom:width, dom:height
+
     render
+
+  def onclick
+    if 'cursor: none;' in self.style
+      self.style = self.style.replace 'cursor: none;', ''
+    else if self.style
+      self.style = self.style + 'cursor: none;'
+    else
+      self.style = 'cursor: none;'
 
   def _getCircleBgColor
     @colorPalette[Math.floor Math.random * @colorPalette:length]
