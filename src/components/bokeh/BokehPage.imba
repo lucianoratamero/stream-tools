@@ -33,7 +33,7 @@ export tag BokehPage < canvas
 
   def render
     <self height=window:innerHeight width=window:innerWidth>
-      if @currentNodes:length < @numberOfCircles && Math.random > 0.5
+      if @currentNodes:length < @numberOfCircles && Math.random > 0.75
         @currentNodes.push {
           size: 1,
           opacity: 1,
