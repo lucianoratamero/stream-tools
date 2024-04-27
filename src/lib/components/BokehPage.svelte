@@ -20,15 +20,6 @@
 	let canvas: HTMLCanvasElement | null = $state(null);
 	let windowSize: { width: number; height: number } | undefined = $state();
 
-	$effect(() => {
-		numberOfCircles = (window.innerWidth / window.innerHeight) * 200;
-		windowSize = { width: window.innerWidth, height: window.innerHeight };
-		window.onresize = () => {
-			numberOfCircles = (window.innerWidth / window.innerHeight) * 200;
-			windowSize = { width: window.innerWidth, height: window.innerHeight };
-		};
-	});
-
 	const getColor = (node: Circle) => {
 		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(node.color) || [];
 		return (
@@ -75,6 +66,12 @@
 	};
 
 	onMount(() => {
+		numberOfCircles = (window.innerWidth / window.innerHeight) * 200;
+		windowSize = { width: window.innerWidth, height: window.innerHeight };
+		window.onresize = () => {
+			numberOfCircles = (window.innerWidth / window.innerHeight) * 200;
+			windowSize = { width: window.innerWidth, height: window.innerHeight };
+		};
 		requestAnimationFrame(render);
 	});
 </script>
