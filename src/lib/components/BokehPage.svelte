@@ -19,10 +19,11 @@
 	let numberOfCircles = $state(0);
 	let spawningChance = $derived(decay > 1 ? 1 : decay * 0.5);
 	let canvas: HTMLCanvasElement | null = $state(null);
-	let windowSize = $state({ width: window.innerWidth, height: window.innerHeight });
+	let windowSize: { width: number; height: number } | undefined = $state();
 
 	$effect(() => {
 		numberOfCircles = (window.innerWidth / window.innerHeight) * 200;
+		windowSize = { width: window.innerWidth, height: window.innerHeight };
 		window.onresize = () => {
 			numberOfCircles = (window.innerWidth / window.innerHeight) * 200;
 			windowSize = { width: window.innerWidth, height: window.innerHeight };
@@ -81,7 +82,7 @@
 	});
 </script>
 
-{#if browser}
+{#if browser && windowSize}
 	<canvas
 		onclick={() => (showForm = !showForm)}
 		style={!showForm ? 'cursor: none' : ''}

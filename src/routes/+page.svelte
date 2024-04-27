@@ -27,11 +27,7 @@
 	<p><button type="button" onclick={goFullscreen}>fullscreen</button></p>
 </form>
 
-<BokehPage
-  {colorPalette}
-  {decay}
-  bind:showForm={showForm}
- />
+<BokehPage {colorPalette} {decay} bind:showForm />
 
 <style>
 	:global {
