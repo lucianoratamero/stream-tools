@@ -1,8 +1,8 @@
 # bokeh-experiments
 
-this is a small proof of concept, meant for studying [imba](http://imba.io/) and discovering artistic value with web components
+this is the second version of the app, now rewritten in svelte 5.
 
-the generated site is on [my personal site](http://www.ratamero.com/bokeh-experiments/), which runs on github pages (based on the dist folder)
+the generated site is on [my github pages](http://lucianoratamero.github.io/bokeh-experiments/), which runs on github pages (based on the dist folder)
 
 if you have any questions, just open an issue and I'll answer it when I can :)
 
