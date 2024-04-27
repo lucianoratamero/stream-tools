@@ -17,7 +17,6 @@
 	let { colorPalette, showForm = $bindable(), decay }: Props = $props();
 	let currentNodes: Circle[] = $state([]);
 	let numberOfCircles = $state(0);
-	let spawningChance = $derived(decay > 1 ? 1 : decay * 0.5);
 	let canvas: HTMLCanvasElement | null = $state(null);
 	let windowSize: { width: number; height: number } | undefined = $state();
 
@@ -28,20 +27,6 @@
 			numberOfCircles = (window.innerWidth / window.innerHeight) * 200;
 			windowSize = { width: window.innerWidth, height: window.innerHeight };
 		};
-	});
-
-	$effect(() => {
-		if (currentNodes.length < numberOfCircles && Math.random() < spawningChance) {
-			currentNodes.push({
-				size: 1,
-				opacity: 1,
-				color: colorPalette[Math.floor(Math.random() * colorPalette.length)],
-				position: {
-					top: Math.random() * window.innerHeight - 0.5,
-					left: Math.random() * window.innerWidth - 0.5
-				}
-			});
-		}
 	});
 
 	const getColor = (node: Circle) => {
@@ -74,6 +59,18 @@
 				node.opacity = 1 - (node.size * decay) / 200;
 				return node;
 			});
+
+		if (currentNodes.length < numberOfCircles && Math.random() < (decay > 1 ? 1 : decay * 0.5)) {
+			currentNodes.push({
+				size: 1,
+				opacity: 1,
+				color: colorPalette[Math.floor(Math.random() * colorPalette.length)],
+				position: {
+					top: Math.random() * window.innerHeight - 0.5,
+					left: Math.random() * window.innerWidth - 0.5
+				}
+			});
+		}
 		requestAnimationFrame(render);
 	};
 

@@ -21,7 +21,7 @@
 	<p>Click on the canvas to hide the form :]</p>
 	<p>
 		Decay (recommended: between 0.2 and 1.8):
-		<input bind:value={decay} type="number" />
+		<input bind:value={decay} />
 	</p>
 	<p><button type="button" onclick={changePallette}> Change color palette</button></p>
 	<p><button type="button" onclick={goFullscreen}>fullscreen</button></p>
