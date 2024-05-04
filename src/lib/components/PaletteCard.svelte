@@ -46,7 +46,9 @@
 			<div class="px-2 text-center">
 				<p class="text-sm text-gray-500">Id</p>
 				<p>
-					{colorPalettes.findIndex((p) => JSON.stringify(p) === JSON.stringify(palette))}
+					{isBookmark
+						? i
+						: colorPalettes.findIndex((p) => JSON.stringify(p) === JSON.stringify(palette))}
 				</p>
 			</div>
 		</div>
