@@ -1,11 +1,13 @@
 <script lang="ts">
-	import colorPalettes from 'nice-color-palettes/1000.json';
+	import { page } from '$app/stores';
 	import BokehPage from '$lib/components/BokehPage.svelte';
-	import { onMount } from 'svelte';
-	import { isEqual } from 'lodash-es';
 	import Button from '$lib/components/Button.svelte';
+	import { isEqual } from 'lodash-es';
+	import colorPalettes from 'nice-color-palettes/1000.json';
+	import { onMount } from 'svelte';
 
 	let history = $state<{ colorPalette: string[] }[]>([]);
+	let bookmarks = $state<{ colorPalette: string[]; name?: string }[]>([]);
 	let colorPalette = $state(colorPalettes[Math.floor(Math.random() * 1000)]);
 	let showForm = $state(false);
 	let decay = $state(0.4);
@@ -33,6 +35,15 @@
 	onMount(() => {
 		history = JSON.parse(localStorage.getItem('history') || '[]');
 		syncHistory();
+
+		bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+		if ($page.url.searchParams.has('bookmark')) {
+			const name = $page.url.searchParams.get('bookmark');
+			if (name && bookmarks.some((bookmark) => bookmark.name === name)) {
+				colorPalette =
+					bookmarks.find((bookmark) => bookmark.name === name)?.colorPalette || colorPalette;
+			}
+		}
 	});
 
 	$effect(() => {
