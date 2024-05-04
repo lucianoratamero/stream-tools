@@ -36,32 +36,34 @@
 
 	const render = () => {
 		const context = canvas?.getContext('2d') as CanvasRenderingContext2D;
-		context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+		if (context) {
+			context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-		currentNodes = currentNodes
-			.filter((node: Circle) => node.opacity > 0)
-			.map((node: Circle) => {
-				context.fillStyle = `rgba(${getColor(node)})`;
-				context.beginPath();
-				context.arc(node.position.left, node.position.top, node.size, 0, 2 * Math.PI);
-				context.fill();
-				context.closePath();
+			currentNodes = currentNodes
+				.filter((node: Circle) => node.opacity > 0)
+				.map((node: Circle) => {
+					context.fillStyle = `rgba(${getColor(node)})`;
+					context.beginPath();
+					context.arc(node.position.left, node.position.top, node.size, 0, 2 * Math.PI);
+					context.fill();
+					context.closePath();
 
-				node.size = node.size + (window.innerWidth / window.innerHeight) * decay;
-				node.opacity = 1 - (node.size * decay) / 200;
-				return node;
-			});
+					node.size = node.size + (window.innerWidth / window.innerHeight) * decay;
+					node.opacity = 1 - (node.size * decay) / 200;
+					return node;
+				});
 
-		if (currentNodes.length < numberOfCircles && Math.random() < (decay > 1 ? 1 : decay * 0.5)) {
-			currentNodes.push({
-				size: 1,
-				opacity: 1,
-				color: colorPalette[Math.floor(Math.random() * colorPalette.length)],
-				position: {
-					top: Math.random() * window.innerHeight - 0.5,
-					left: Math.random() * window.innerWidth - 0.5
-				}
-			});
+			if (currentNodes.length < numberOfCircles && Math.random() < (decay > 1 ? 1 : decay * 0.5)) {
+				currentNodes.push({
+					size: 1,
+					opacity: 1,
+					color: colorPalette[Math.floor(Math.random() * colorPalette.length)],
+					position: {
+						top: Math.random() * window.innerHeight - 0.5,
+						left: Math.random() * window.innerWidth - 0.5
+					}
+				});
+			}
 		}
 		requestAnimationFrame(render);
 	};
