@@ -1,7 +1,10 @@
 <script lang="ts">
 	import colorPalettes from 'nice-color-palettes/1000.json';
 	import BokehPage from '$lib/components/BokehPage.svelte';
+	import { onMount } from 'svelte';
+	import { isEqual } from 'lodash-es';
 
+	let history = $state<{ colorPalette: string[] }[]>([]);
 	let colorPalette = $state(colorPalettes[Math.floor(Math.random() * 1000)]);
 	let showForm = $state(false);
 	let decay = $state(0.4);
@@ -15,6 +18,25 @@
 		const requestFullscreen = el.requestFullscreen;
 		requestFullscreen.call(el);
 	};
+
+	const syncHistory = () => {
+		if (!isEqual(history[history.length - 1].colorPalette, colorPalette)) {
+			while (history.length >= 100) {
+				history.shift();
+			}
+			history.push({ colorPalette });
+			localStorage.setItem('history', JSON.stringify(history));
+		}
+	};
+
+	onMount(() => {
+		history = JSON.parse(localStorage.getItem('history') || '[]');
+		syncHistory();
+	});
+
+	$effect(() => {
+		syncHistory();
+	});
 </script>
 
 <form class:hidden={!showForm}>
