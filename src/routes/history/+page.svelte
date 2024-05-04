@@ -33,7 +33,7 @@
 	});
 </script>
 
-<main class="grid h-screen grid-cols-2 gap-4 p-4">
+<main class="grid h-screen grid-cols-2 gap-4 bg-white p-4">
 	<div class="relative max-h-full overflow-hidden rounded shadow-lg">
 		{#key colorPalette}
 			{#if colorPalette}
