@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 	import BokehPage from '$lib/components/BokehPage.svelte';
 	import Button from '$lib/components/Button.svelte';
@@ -64,7 +65,7 @@
 		<Button onclick={changePallette}>Change color palette</Button>
 		<Button onclick={goFullscreen}>Go fullscreen</Button>
 	</div>
-	<Button href="/history">See history</Button>
+	<Button href={`${base}/history`}>See history</Button>
 </form>
 
 <BokehPage {colorPalette} {decay} bind:showForm />
