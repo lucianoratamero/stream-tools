@@ -11,10 +11,8 @@ if you have any questions, just open an issue and I'll answer it when I can :)
 ```bash
 # install dependencies
 npm install
-# start webpack-dev-server and compiler
+# start the dev server
 npm run dev
-# build to the dist folder
+# build to production
 npm run build
-# or deploy it to github pages
-npm run deploy
 ```
