@@ -61,11 +61,14 @@
 		Decay (recommended: between 0.2 and 1.8):
 		<input class="border p-1" bind:value={decay} />
 	</p>
-	<div>
+	<div class="flex gap-2">
 		<Button onclick={changePallette}>Change color palette</Button>
 		<Button onclick={goFullscreen}>Go fullscreen</Button>
 	</div>
-	<Button href={`${base}/history`}>See history</Button>
+	<div class="flex gap-2">
+		<Button href={`${base}/history`}>See history</Button>
+		<Button href={`${base}/create`}>Create palette</Button>
+	</div>
 </form>
 
 <BokehPage {colorPalette} {decay} bind:showForm />
