@@ -78,6 +78,7 @@
 
 {#if browser && windowSize}
 	<canvas
+		class="absolute m-0 overflow-hidden bg-zinc-900"
 		onclick={() => (showForm = !showForm)}
 		style={!showForm ? 'cursor: none' : ''}
 		bind:this={canvas}
