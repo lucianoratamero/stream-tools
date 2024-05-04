@@ -1,11 +1,12 @@
 <script lang="ts">
 	import BokehPage from '$lib/components/BokehPage.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import PaletteCard from '$lib/components/PaletteCard.svelte';
 	import colorPalettes from 'nice-color-palettes/1000.json';
 	import { onMount } from 'svelte';
 
 	let history = $state<{ colorPalette: string[]; name?: string }[]>([]);
-	let bookmarks = $state<{ colorPalette: string[]; name?: string }[]>([]);
+	let bookmarks = $state<{ colorPalette: string[]; name: string }[]>([]);
 	let colorPalette = $state<string[]>();
 
 	const generateColorPalette = () => {
@@ -45,30 +46,17 @@
 		<section>
 			<h2 class="text-2xl font-bold">Bookmarks</h2>
 			<div class="mt-2 flex flex-col-reverse gap-2">
-				{#each bookmarks as { colorPalette: palette, name = '' }, i}
-					<div class="flex items-center justify-between gap-2">
-						<div>
-							<input
-								class="border p-1"
-								placeholder="Name"
-								oninput={(e) =>
-									(bookmarks[i] = { colorPalette: palette, name: e.currentTarget.value })}
-								value={name}
-							/>
-						</div>
-						<div class="flex gap-1">
-							{#each palette as color}
-								<span class="inline-block h-4 w-4 rounded-full" style="background-color: {color}"
-								></span>
-							{/each}
-						</div>
-						<div>
-							<Button onclick={() => (colorPalette = palette)}>Preview</Button>
-							<Button onclick={() => (bookmarks = bookmarks.filter((i) => i.name !== name))}>
-								Remove bookmark
-							</Button>
-						</div>
-					</div>
+				{#each bookmarks as { colorPalette: palette, name }, i}
+					<PaletteCard
+						isBookmark
+						{palette}
+						{name}
+						{i}
+						{colorPalettes}
+						bind:history
+						bind:bookmarks
+						bind:colorPalette
+					/>
 				{:else}
 					<p class="text-gray-500 py-2 text-center">No bookmarks yet</p>
 				{/each}
@@ -82,35 +70,15 @@
 			</div>
 			<div class="mt-2 flex flex-col-reverse gap-2">
 				{#each history as { colorPalette: palette, name = '' }, i}
-					<div class="flex items-center justify-between gap-2">
-						<div>
-							<input class="border p-1" placeholder="Name" bind:value={history[i].name} />
-						</div>
-						<div class="flex gap-1">
-							{#each palette as color}
-								<span class="inline-block h-4 w-4 rounded-full" style="background-color: {color}"
-								></span>
-							{/each}
-						</div>
-						<div>
-							{#key name}
-								<Button onclick={() => (colorPalette = palette)}>Preview</Button>
-								{#if name?.length && bookmarks.find((i) => i.name === name)}
-									<Button onclick={() => (bookmarks = bookmarks.filter((i) => i.name !== name))}>
-										Remove bookmark
-									</Button>
-								{:else}
-									<Button
-										disabled={!name?.length}
-										title="To add to bookmarks, please provide a name"
-										onclick={() => bookmarks.push({ colorPalette: palette, name })}
-									>
-										Add to bookmarks
-									</Button>
-								{/if}
-							{/key}
-						</div>
-					</div>
+					<PaletteCard
+						{palette}
+						{name}
+						{i}
+						{colorPalettes}
+						bind:history
+						bind:bookmarks
+						bind:colorPalette
+					/>
 				{/each}
 			</div>
 		</section>
