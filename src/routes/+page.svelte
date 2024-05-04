@@ -21,7 +21,7 @@
 	};
 
 	const syncHistory = () => {
-		if (!isEqual(history[history.length - 1].colorPalette, colorPalette)) {
+		if (!isEqual(history[history.length - 1]?.colorPalette, colorPalette)) {
 			while (history.length >= 100) {
 				history.shift();
 			}
