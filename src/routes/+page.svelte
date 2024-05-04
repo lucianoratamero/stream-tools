@@ -64,6 +64,7 @@
 		<Button onclick={changePallette}>Change color palette</Button>
 		<Button onclick={goFullscreen}>Go fullscreen</Button>
 	</div>
+	<Button href="/history">See history</Button>
 </form>
 
 <BokehPage {colorPalette} {decay} bind:showForm />
