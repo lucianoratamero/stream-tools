@@ -30,14 +30,26 @@
 		colorPalettes,
 		isBookmark
 	}: Props = $props();
+
+	let slugRegex = new RegExp('^[a-z0-9]+(?:-[a-z0-9]+)*$');
 </script>
 
 <div class="flex items-center justify-between gap-2 rounded border p-2 shadow">
 	<div>
 		{#if isBookmark}
-			<input class="mb-2 rounded border p-1" placeholder="Name" bind:value={bookmarks[i].name} />
+			<input
+				class="mb-2 rounded border p-1"
+				pattern="^[a-z0-9]+(?:-[a-z0-9]+)*$"
+				placeholder="Name"
+				bind:value={bookmarks[i].name}
+			/>
 		{:else if history}
-			<input class="mb-2 rounded border p-1" placeholder="Name" bind:value={history[i].name} />
+			<input
+				class="mb-2 rounded border p-1"
+				pattern="^[a-z0-9]+(?:-[a-z0-9]+)*$"
+				placeholder="Name"
+				bind:value={history[i].name}
+			/>
 		{/if}
 		<div class="flex items-center gap-1">
 			{#each palette as color}
@@ -62,7 +74,7 @@
 				</Button>
 			{:else}
 				<Button
-					disabled={!name?.length}
+					disabled={!name?.length || !slugRegex.test(name)}
 					title="To add to bookmarks, please provide a name"
 					onclick={() => bookmarks.push({ colorPalette: palette, name })}
 				>

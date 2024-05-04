@@ -14,6 +14,8 @@
 	let newColorPaletteName = $state<string>();
 	let openPaletteDropdown = $state(false);
 
+	let slugRegex = new RegExp('^[a-z0-9]+(?:-[a-z0-9]+)*$');
+
 	onMount(() => {
 		bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
 	});
@@ -116,10 +118,16 @@
 			{#if newColorPalette}
 				<div class="mt-4 rounded border p-4">
 					<div class="flex justify-between">
-						<input class="rounded border p-2" placeholder="Name" bind:value={newColorPaletteName} />
+						<input
+							class="rounded border p-2"
+							pattern="^[a-z0-9]+(?:-[a-z0-9]+)*$"
+							placeholder="Name"
+							bind:value={newColorPaletteName}
+						/>
 						{#key newColorPaletteName}
 							<Button
-								disabled={!newColorPaletteName?.length}
+								title="To add to bookmarks, please provide a name as slug"
+								disabled={!newColorPaletteName?.length || !slugRegex.test(newColorPaletteName)}
 								onclick={() => {
 								bookmarks.push({
 									colorPalette: newColorPalette as string[],
