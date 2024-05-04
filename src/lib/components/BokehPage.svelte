@@ -6,6 +6,7 @@
 		colorPalette: string[];
 		showForm: boolean;
 		decay: number;
+		isWrapped?: boolean;
 	};
 	type Circle = {
 		opacity: number;
@@ -14,7 +15,7 @@
 		color: string;
 	};
 
-	let { colorPalette, showForm = $bindable(), decay }: Props = $props();
+	let { colorPalette, showForm = $bindable(), decay, isWrapped }: Props = $props();
 	let currentNodes: Circle[] = $state([]);
 	let numberOfCircles = $state(0);
 	let canvas: HTMLCanvasElement | null = $state(null);
@@ -66,23 +67,40 @@
 	};
 
 	onMount(() => {
-		numberOfCircles = (window.innerWidth / window.innerHeight) * 200;
-		windowSize = { width: window.innerWidth, height: window.innerHeight };
+		let width = window.innerWidth;
+		let height = window.innerHeight;
+
+		if (isWrapped) {
+			width = canvas?.parentElement?.clientWidth as number;
+			height = canvas?.parentElement?.clientHeight as number;
+		}
+
+		numberOfCircles = width > height ? (width / height) * 200 : (height / width) * 200;
+		windowSize = { width, height };
+
 		window.onresize = () => {
-			numberOfCircles = (window.innerWidth / window.innerHeight) * 200;
-			windowSize = { width: window.innerWidth, height: window.innerHeight };
+			let width = window.innerWidth;
+			let height = window.innerHeight;
+
+			if (isWrapped) {
+				width = canvas?.parentElement?.clientWidth as number;
+				height = canvas?.parentElement?.clientHeight as number;
+			}
+
+			windowSize = { width, height };
+			numberOfCircles = width > height ? (width / height) * 200 : (height / width) * 200;
 		};
 		requestAnimationFrame(render);
 	});
 </script>
 
-{#if browser && windowSize}
+{#if browser}
 	<canvas
 		class="absolute m-0 overflow-hidden bg-zinc-900"
 		onclick={() => (showForm = !showForm)}
 		style={!showForm ? 'cursor: none' : ''}
 		bind:this={canvas}
-		width={windowSize.width}
-		height={windowSize.height}
+		width={windowSize?.width || 0}
+		height={windowSize?.height || 0}
 	></canvas>
 {/if}
