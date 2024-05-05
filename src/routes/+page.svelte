@@ -3,19 +3,22 @@
 	import { page } from '$app/stores';
 	import BokehPage from '$lib/components/BokehPage.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import PaletteCard from '$lib/components/PaletteCard.svelte';
 	import { isEqual } from 'lodash-es';
 	import colorPalettes from 'nice-color-palettes/1000.json';
 	import { onMount } from 'svelte';
 	import { Trash } from 'svelte-heros-v2';
 
-	let history = $state<{ colorPalette: string[] }[]>([]);
-	let bookmarks = $state<{ colorPalette: string[]; name?: string }[]>([]);
+	let history = $state<{ colorPalette: string[]; name?: string }[]>([]);
+	let bookmarks = $state<{ colorPalette: string[]; name: string }[]>([]);
 	let colorPalette = $state(colorPalettes[Math.floor(Math.random() * 1000)]);
 	let showForm = $state(false);
 	let decay = $state(0.4);
+	let placeholderName = $state('');
 
 	const changePallette = () => {
 		colorPalette = colorPalettes[Math.floor(Math.random() * 1000)];
+		placeholderName = '';
 	};
 
 	const goFullscreen = () => {
@@ -86,6 +89,21 @@
 		<Button href={`${base}/history`}>See history</Button>
 		<Button href={`${base}/create`}>Create palette</Button>
 	</div>
+
+	<section class="my-2">
+		<h2 class="text-lg">Current palette</h2>
+		<PaletteCard
+			isPlaceholder
+			palette={colorPalette}
+			bind:name={placeholderName}
+			i={colorPalettes.findIndex((p) => JSON.stringify(p) === JSON.stringify(colorPalette))}
+			{colorPalettes}
+			bind:history
+			bind:bookmarks
+			bind:colorPalette
+		/>
+	</section>
+
 	<h2 class="text-lg">Bookmarks</h2>
 	<div class="grid grid-cols-3 gap-2">
 		{#each bookmarks as { name }, i}
@@ -102,7 +120,7 @@
 			</Button>
 		{:else}
 			<div class="text-center col-span-3">
-				<p class="text-gray-500 py-2">No bookmarks yet</p>
+				<p class="text-gray-500 mb-2">No bookmarks yet</p>
 				<p>
 					<Button href={`${base}/create`}>Create one</Button>
 					<span class="px-2">or</span>

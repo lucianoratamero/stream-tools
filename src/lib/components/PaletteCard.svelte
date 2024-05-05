@@ -8,6 +8,7 @@
 		bookmarks: { name: string; colorPalette: string[] }[];
 		colorPalette?: string[];
 		colorPalettes: string[][];
+		isPlaceholder?: boolean;
 	};
 
 	type Props =
@@ -24,11 +25,12 @@
 		history = $bindable(),
 		bookmarks = $bindable(),
 		colorPalette = $bindable(),
+		name = $bindable(),
 		palette,
-		name,
 		i,
 		colorPalettes,
-		isBookmark
+		isBookmark,
+		isPlaceholder
 	}: Props = $props();
 
 	let slugRegex = new RegExp('^[a-z0-9]+(?:-[a-z0-9]+)*$');
@@ -42,6 +44,13 @@
 				pattern="^[a-z0-9]+(?:-[a-z0-9]+)*$"
 				placeholder="Name"
 				bind:value={bookmarks[i].name}
+			/>
+		{:else if isPlaceholder}
+			<input
+				class="mb-2 rounded border p-1"
+				pattern="^[a-z0-9]+(?:-[a-z0-9]+)*$"
+				placeholder="Name"
+				bind:value={name}
 			/>
 		{:else if history}
 			<input
@@ -67,7 +76,9 @@
 	</div>
 	<div>
 		{#key name}
-			<Button onclick={() => (colorPalette = palette)}>Preview</Button>
+			{#if !isPlaceholder}
+				<Button onclick={() => (colorPalette = palette)}>Preview</Button>
+			{/if}
 			{#if name?.length && bookmarks.find((i) => i.name === name)}
 				<Button onclick={() => (bookmarks = bookmarks.filter((i) => i.name !== name))}>
 					Remove bookmark
