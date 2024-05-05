@@ -6,6 +6,7 @@
 	import { isEqual } from 'lodash-es';
 	import colorPalettes from 'nice-color-palettes/1000.json';
 	import { onMount } from 'svelte';
+	import { Trash } from 'svelte-heros-v2';
 
 	let history = $state<{ colorPalette: string[] }[]>([]);
 	let bookmarks = $state<{ colorPalette: string[]; name?: string }[]>([]);
@@ -50,6 +51,22 @@
 	$effect(() => {
 		syncHistory();
 	});
+
+	$effect(() => {
+		localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+	});
+
+	$effect(() => {
+		const bookmarkFromUrl = $page.url.searchParams.get('bookmark');
+
+		if (bookmarkFromUrl) {
+			const name = $page.url.searchParams.get('bookmark');
+			if (name && bookmarks.some((bookmark) => bookmark.name === name)) {
+				colorPalette =
+					bookmarks.find((bookmark) => bookmark.name === name)?.colorPalette || colorPalette;
+			}
+		}
+	});
 </script>
 
 <form
@@ -68,6 +85,22 @@
 	<div class="flex gap-2">
 		<Button href={`${base}/history`}>See history</Button>
 		<Button href={`${base}/create`}>Create palette</Button>
+	</div>
+	<h2 class="text-lg">Bookmarks</h2>
+	<div class="grid grid-cols-3 gap-2">
+		{#each bookmarks as { name }, i}
+			<Button class="flex items-center justify-between gap-2" href={`${base}/?bookmark=${name}`}>
+				{name || `Bookmark ${i + 1}`}
+				<Button
+					type="button"
+					class="border-red-800 bg-red-300 !p-1"
+					title="Remove bookmark"
+					onclick={() => (bookmarks = bookmarks.filter((item) => item.name !== name))}
+				>
+					<Trash class=" stroke-white" />
+				</Button>
+			</Button>
+		{/each}
 	</div>
 </form>
 
