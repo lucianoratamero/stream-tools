@@ -11,7 +11,7 @@
 
 	type Props =
 		| (BaseProps & {
-				type: 'circle';
+				type?: 'circle';
 				svgContent?: undefined;
 				colorPalette: string[];
 		  })
