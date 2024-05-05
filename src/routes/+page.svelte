@@ -100,6 +100,15 @@
 					<Trash class=" stroke-white" />
 				</Button>
 			</Button>
+		{:else}
+			<div class="text-center col-span-3">
+				<p class="text-gray-500 py-2">No bookmarks yet</p>
+				<p>
+					<Button href={`${base}/create`}>Create one</Button>
+					<span class="px-2">or</span>
+					<Button href={`${base}/history`}>See history</Button>
+				</p>
+			</div>
 		{/each}
 	</div>
 </form>
