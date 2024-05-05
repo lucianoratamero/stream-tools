@@ -9,8 +9,8 @@ if you have any questions, just open an issue and I'll answer it when I can :)
 ## Getting started
 
 ```bash
-# install dependencies
-npm install
+# install dependencies - while svelte 5 is not released, we need to force the install
+npm install --force
 # start the dev server
 npm run dev
 # build to production
