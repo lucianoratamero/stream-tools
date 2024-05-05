@@ -37,7 +37,7 @@
 	const render = () => {
 		const context = canvas?.getContext('2d') as CanvasRenderingContext2D;
 		if (context) {
-			context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+			context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 
 			currentNodes = currentNodes
 				.filter((node: Node) => node.opacity > 0)
@@ -55,6 +55,7 @@
 	};
 
 	onMount(() => {
+		const NODES_MULTIPLIER = 600;
 		let width = window.innerWidth;
 		let height = window.innerHeight;
 
@@ -63,7 +64,8 @@
 			height = canvas?.parentElement?.clientHeight as number;
 		}
 
-		numberOfNodes = width > height ? (width / height) * 200 : (height / width) * 200;
+		numberOfNodes =
+			width > height ? (width / height) * NODES_MULTIPLIER : (height / width) * NODES_MULTIPLIER;
 		windowSize = { width, height };
 
 		window.onresize = () => {
@@ -76,7 +78,8 @@
 			}
 
 			windowSize = { width, height };
-			numberOfNodes = width > height ? (width / height) * 200 : (height / width) * 200;
+			numberOfNodes =
+				width > height ? (width / height) * NODES_MULTIPLIER : (height / width) * NODES_MULTIPLIER;
 		};
 		requestAnimationFrame(render);
 	});
