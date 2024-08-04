@@ -45,7 +45,7 @@
 </script>
 
 {#if show_timer}
-	<div class="flex h-screen flex-col items-center justify-center">
+	<div class="flex h-screen flex-col items-center justify-center text-white">
 		<div class="relative tabular-nums">
 			{#if show_error}
 				<p>Invalid time</p>
