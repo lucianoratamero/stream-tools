@@ -7,7 +7,7 @@
 	import { isEqual } from 'lodash-es';
 	import colorPalettes from 'nice-color-palettes/1000.json';
 	import { onMount } from 'svelte';
-	import { Trash } from 'svelte-heros-v2';
+	import { Icon, Trash } from 'svelte-hero-icons';
 
 	let history = $state<{ colorPalette: string[]; name?: string }[]>([]);
 	let bookmarks = $state<{ colorPalette: string[]; name: string }[]>([]);
@@ -115,7 +115,7 @@
 					title="Remove bookmark"
 					onclick={() => (bookmarks = bookmarks.filter((item) => item.name !== name))}
 				>
-					<Trash class=" stroke-white" />
+					<Icon src={Trash} class="h-4 w-4" />
 				</Button>
 			</Button>
 		{:else}
