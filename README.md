@@ -53,7 +53,7 @@ this page offers an overlay with effects. each effect is enabled by its own sear
 
 this effect is enabled by passing the `crt` search param. it loads a CRT texture, emulating old computer monitors/tvs.
 
-example: `https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink`
+example: `https://lucianoratamero.github.io/stream-tools/effects/?crt`
 
 ### timer
 
