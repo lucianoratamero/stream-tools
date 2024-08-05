@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import confetti_audio from '$lib/audio/confetti.mp3';
+	import mario_party_finish from '$lib/audio/mario-party-finish.mp3';
 	import { onMount } from 'svelte';
 	import { Confetti } from 'svelte-confetti';
 
@@ -54,7 +56,9 @@
 				<p class="inline-block text-9xl font-bold text-green-600">
 					{formatted_time}
 				</p>
-				<div class="absolute left-1/2 top-full">
+				<audio src={confetti_audio} autoplay></audio>
+				<audio src={mario_party_finish} autoplay></audio>
+				<div class="absolute left-1/2 top-[95%]">
 					<Confetti
 						rounded
 						x={[-1.6, 1.6]}
