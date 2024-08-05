@@ -31,7 +31,7 @@ if you click the background, a form appears with settings that are saved on the 
 
 this page accepts a `bookmark` search parameter, that loads a previously saved bookmark.
 
-example: `[https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink](https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink)`
+example: [https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink](https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink)
 
 ##### `/bokeh/create/`
 
@@ -53,7 +53,7 @@ this page offers an overlay with effects. each effect is enabled by its own sear
 
 this effect is enabled by passing the `crt` search param. it loads a CRT texture, emulating old computer monitors/tvs.
 
-example: `[https://lucianoratamero.github.io/stream-tools/effects/?crt](https://lucianoratamero.github.io/stream-tools/effects/?crt)`
+example: [https://lucianoratamero.github.io/stream-tools/effects/?crt](https://lucianoratamero.github.io/stream-tools/effects/?crt)
 
 ### timer
 
@@ -69,4 +69,4 @@ the timer accepts two search params: `timeInSeconds` and `noAudio`.
 
 `noAudio` disables the alert at the end of the timer.
 
-example: `[https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6](https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6)`
+example: [https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6](https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6)
