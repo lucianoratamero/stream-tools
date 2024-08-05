@@ -68,3 +68,5 @@ the timer accepts two search params: `timeInSeconds` and `noAudio`.
 `timeInSeconds` is literally how many seconds you want to start the countdown with.
 
 `noAudio` disables the alert at the end of the timer.
+
+example: `[https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6](https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6)`
