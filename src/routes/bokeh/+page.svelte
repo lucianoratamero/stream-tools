@@ -86,8 +86,8 @@
 		<Button onclick={goFullscreen}>Go fullscreen</Button>
 	</div>
 	<div class="flex gap-2">
-		<Button href={`${base}/history`}>See history</Button>
-		<Button href={`${base}/create`}>Create palette</Button>
+		<Button href={`${base}/bokeh/history`}>See history</Button>
+		<Button href={`${base}/bokeh/create`}>Create palette</Button>
 	</div>
 
 	<section class="my-2">
@@ -122,9 +122,9 @@
 			<div class="text-center col-span-3">
 				<p class="text-gray-500 mb-2">No bookmarks yet</p>
 				<p>
-					<Button href={`${base}/create`}>Create one</Button>
+					<Button href={`${base}/bokeh/create`}>Create one</Button>
 					<span class="px-2">or</span>
-					<Button href={`${base}/history`}>See history</Button>
+					<Button href={`${base}/bokeh/history`}>See history</Button>
 				</p>
 			</div>
 		{/each}
