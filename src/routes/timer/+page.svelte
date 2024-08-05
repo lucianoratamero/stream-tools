@@ -6,6 +6,7 @@
 	import { Confetti } from 'svelte-confetti';
 
 	let countdown_time: number | undefined = $state();
+	let no_audio = $state(false);
 	let show_timer = $state(false);
 	let show_error = $state();
 	let formatted_time = $derived.by(() => formatTime(countdown_time));
@@ -27,6 +28,11 @@
 
 	onMount(() => {
 		const searchParams = $page.url.searchParams;
+
+		if (searchParams.has('noAudio')) {
+			no_audio = true;
+		}
+
 		countdown_time = Number(searchParams.get('timeInSeconds'));
 		show_error =
 			!Number(searchParams?.get('timeInSeconds')) ||
@@ -56,8 +62,10 @@
 				<p class="inline-block text-9xl font-bold text-green-600">
 					{formatted_time}
 				</p>
-				<audio src={confetti_audio} autoplay></audio>
-				<audio src={mario_party_finish} autoplay></audio>
+				{#if !no_audio}
+					<audio src={confetti_audio} autoplay></audio>
+					<audio src={mario_party_finish} autoplay></audio>
+				{/if}
 				<div class="absolute left-1/2 top-[95%]">
 					<Confetti
 						rounded
