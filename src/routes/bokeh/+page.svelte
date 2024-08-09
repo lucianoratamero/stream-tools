@@ -55,6 +55,10 @@
 		if ($page.url.searchParams.has('transparentBg')) {
 			transparentBg = $page.url.searchParams.get('transparentBg') !== 'false';
 		}
+
+		if ($page.url.searchParams.has('decay')) {
+			decay = Number($page.url.searchParams.get('decay') as string);
+		}
 	});
 
 	$effect(() => {

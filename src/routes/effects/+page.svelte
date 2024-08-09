@@ -8,7 +8,8 @@
 	let crt_effect_enabled = $state(false);
 	let confetti_effect_enabled = $state(false);
 	let bokeh_effect_enabled = $state(false);
-	let bokeh_options: { transparent_bg?: boolean; bookmark?: string } = { transparent_bg: false };
+	let bokeh_options: { transparentBg?: string; bookmark?: string; decay?: string } = {};
+	let bokeh_options_string = $derived(new URLSearchParams(bokeh_options).toString());
 
 	onMount(() => {
 		const search_params = $page.url.searchParams;
@@ -22,10 +23,13 @@
 		if (search_params.has('bokeh')) {
 			bokeh_effect_enabled = true;
 			if (search_params.has('transparentBg')) {
-				bokeh_options.transparent_bg = search_params.get('transparentBg') !== 'false';
+				bokeh_options.transparentBg = search_params.get('transparentBg') as string;
 			}
 			if (search_params.has('bookmark')) {
 				bokeh_options.bookmark = search_params.get('bookmark') as string;
+			}
+			if (search_params.has('decay')) {
+				bokeh_options.decay = search_params.get('decay') as string;
 			}
 		}
 	});
@@ -52,7 +56,7 @@
 {#if bokeh_effect_enabled}
 	<iframe
 		title="bokeh"
-		src={`${base}/bokeh?${bokeh_options.transparent_bg ? '&transparentBg' : ''}${bokeh_options.bookmark ? `&bookmark=${bokeh_options.bookmark}` : ''}`}
+		src={`${base}/bokeh?${bokeh_options_string}`}
 		class="fixed h-full w-full bg-cover"
 	></iframe>
 {/if}
