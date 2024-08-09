@@ -6,6 +6,9 @@
 	<h1 class="text-8xl">Tools</h1>
 	<ul class="text-4xl">
 		<li>
+			<a href={`${base}/docs`}>Docs</a>
+		</li>
+		<li>
 			<a href={`${base}/bokeh`}>Bokeh</a>
 		</li>
 		<li>
