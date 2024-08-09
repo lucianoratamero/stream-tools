@@ -29,9 +29,9 @@ this was the first effect, previously implemented in Imba, now in Svelte 5 + can
 
 if you click the background, a form appears with settings that are saved on the localStorage.
 
-this page accepts a `bookmark` search parameter, that loads a previously saved bookmark.
+this page accepts a `bookmark` search parameter, that loads a previously saved bookmark. it also accepts a `decay` param, that changes how fast the circles disappear (it makes the animation faster).
 
-example: [https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink](https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink)
+example: [https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=1.5](https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=1.5)
 
 ##### `/bokeh/create/`
 
@@ -54,6 +54,18 @@ this page offers an overlay with effects. each effect is enabled by its own sear
 this effect is enabled by passing the `crt` search param. it loads a CRT texture, emulating old computer monitors/tvs.
 
 example: [https://lucianoratamero.github.io/stream-tools/effects/?crt](https://lucianoratamero.github.io/stream-tools/effects/?crt)
+
+###### `Confetti`
+
+this effect is enabled by passing the `confetti` search param. it loads a confetti waterfall effect. we recommend using a 1920x1080 source for the best results.
+
+example: [https://lucianoratamero.github.io/stream-tools/effects/?confetti](https://lucianoratamero.github.io/stream-tools/effects/?confetti)
+
+###### `bokeh`
+
+this is the same effect as the `/bokeh` path (in fact, it loads an iframe). it accepts the same search param options as `/bokeh`.
+
+example: [https://lucianoratamero.github.io/stream-tools/effects/?bokeh&bookmark=dark-pink&decay=1.5](https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=1.5)
 
 ### timer
 
