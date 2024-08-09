@@ -6,6 +6,7 @@
 	type BaseProps = {
 		showForm: boolean;
 		decay: number;
+		transparentBg?: boolean;
 		isWrapped?: boolean;
 	};
 
@@ -27,6 +28,7 @@
 		showForm = $bindable(),
 		svgContent,
 		decay,
+		transparentBg,
 		isWrapped
 	}: Props = $props();
 	let currentNodes: Node[] = $state([]);
@@ -87,7 +89,8 @@
 
 {#if browser}
 	<canvas
-		class="absolute m-0 overflow-hidden bg-zinc-900"
+		class="absolute m-0 overflow-hidden"
+		class:bg-zinc-900={!transparentBg}
 		onclick={() => (showForm = !showForm)}
 		style={!showForm ? 'cursor: none' : ''}
 		bind:this={canvas}

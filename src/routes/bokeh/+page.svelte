@@ -13,6 +13,7 @@
 	let bookmarks = $state<{ colorPalette: string[]; name: string }[]>([]);
 	let colorPalette = $state(colorPalettes[Math.floor(Math.random() * 1000)]);
 	let showForm = $state(false);
+	let transparentBg = $state(false);
 	let decay = $state(0.4);
 	let placeholderName = $state('');
 
@@ -48,6 +49,10 @@
 				colorPalette =
 					bookmarks.find((bookmark) => bookmark.name === name)?.colorPalette || colorPalette;
 			}
+		}
+
+		if ($page.url.searchParams.has('transparentBg')) {
+			transparentBg = $page.url.searchParams.get('transparentBg') !== 'false';
 		}
 	});
 
@@ -131,4 +136,4 @@
 	</div>
 </form>
 
-<BokehPage {colorPalette} {decay} bind:showForm />
+<BokehPage {colorPalette} {transparentBg} {decay} bind:showForm />
