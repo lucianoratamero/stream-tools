@@ -17,5 +17,8 @@
 		<li>
 			<a href={`${base}/timer?timeInSeconds=120`}>Timer</a>
 		</li>
+		<li>
+			<a href={`${base}/twitch-chat?channel=luciano_ratamero`}>Twitch Chat</a>
+		</li>
 	</ul>
 </div>
