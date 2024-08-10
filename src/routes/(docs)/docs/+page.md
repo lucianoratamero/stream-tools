@@ -7,16 +7,6 @@ they may work on any setup, as long as you follow the docs ;]
 
 if you have any questions, just open an issue and I'll answer it when I can :)
 
-## Getting started
-
-```bash
-# install dependencies - while svelte 5 is not released, we need to force the install
-npm install --force
-# start the dev server
-npm run dev
-# build to production
-npm run build
-```
 ## pages
 
 ### bokeh-experiments
@@ -40,6 +30,20 @@ this page gives you the tools to create your own color palettes.
 ##### `/bokeh/history/`
 
 this page allows you to view the previously selected color palettes. useful for when you find a palette you really like, but you forgot to bookmark.
+
+### twitch chat
+
+this page shows the twitch chat. it's a simple page that uses the twitch chat API to show the chat in real-time.
+
+there are no themes available yet, but you can change the theme by editing the `src/routes/twitch-chat/TwitchChat.svelte` file. I'll be adding themes soon.
+
+#### paths
+
+##### `/twitch-chat/`
+
+this page accepts a `channel` search parameter, that is the channel you want to watch the chat from. if you have betterttv or frankerfacez emotes, they will be rendered as well. for betterttv emotes, you need to also pass the `twitch_id` search parameter, which you can find [here](https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/).
+
+example: [https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero](https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero)
 
 ### effects
 
@@ -82,3 +86,15 @@ the timer accepts two search params: `timeInSeconds` and `noAudio`.
 `noAudio` disables the alert at the end of the timer.
 
 example: [https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6](https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6)
+
+
+## Developing/Contributing
+
+```bash
+# install dependencies - while svelte 5 is not released, we need to force the install
+npm install --force
+# start the dev server
+npm run dev
+# build to production
+npm run build
+```
