@@ -3,8 +3,8 @@
 </script>
 
 <div class="flex h-screen gap-4">
-	<h1 class="text-8xl">Tools</h1>
-	<ul class="text-4xl">
+	<h1 class="text-[10rem] leading-none">Tools</h1>
+	<ul class="text-8xl">
 		<li>
 			<a href={`${base}/docs`}>Docs</a>
 		</li>
