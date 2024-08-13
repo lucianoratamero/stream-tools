@@ -4,10 +4,11 @@
 	import BokehPage from '$lib/components/BokehPage.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import PaletteCard from '$lib/components/PaletteCard.svelte';
+	import { Trash } from '@steeze-ui/heroicons';
+	import { Icon } from '@steeze-ui/svelte-icon';
 	import { isEqual } from 'lodash-es';
 	import colorPalettes from 'nice-color-palettes/1000.json';
 	import { onMount } from 'svelte';
-	import { Icon, Trash } from 'svelte-hero-icons';
 	import { fade } from 'svelte/transition';
 
 	let history = $state<{ colorPalette: string[]; name?: string }[]>([]);
