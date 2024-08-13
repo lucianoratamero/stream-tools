@@ -1,5 +1,4 @@
 <script lang="ts">
-	// @ts-ignore
 	import ComfyJS, { type OnMessageExtra } from 'comfy.js';
 	import { onMount } from 'svelte';
 	// @ts-ignore

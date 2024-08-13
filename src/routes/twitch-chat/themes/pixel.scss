@@ -1,5 +1,13 @@
 // from https://github.com/NigelOToole/pixel-borders
 
+@font-face {
+	font-family: 'Pixeloid Mono';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('$lib/fonts/PixeloidMono.ttf') format('truetype');
+}
+
 // Generate SVG image for pixelated corners
 @function pixel-borders-image($corner-size, $color) {
 	$svg: '';
@@ -168,10 +176,8 @@
 #chat.pixel {
 	@apply gap-2;
 	& .message {
-		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-			'Courier New', monospace;
+		font-family: 'Pixeloid Mono', ui-monospace, monospace;
 
-		@apply font-bold;
 		@apply bg-black;
 		@apply text-white;
 		@apply border border-white;
