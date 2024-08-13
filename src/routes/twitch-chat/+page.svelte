@@ -590,13 +590,7 @@
 				}
 
 				// Adds a the current time to the start of message and gives it to array
-				let chat = String(
-					usercolor +
-						'<span class="separator">:</span>' +
-						'<span class="message-content">' +
-						emotes +
-						'</span>'
-				);
+				let chat = `<span class="badges">${usercolor}</span><span class="separator">:</span><span class="message-content">${emotes}</span>`;
 
 				collection.push({
 					id: String(id),
@@ -604,6 +598,10 @@
 					message: String(message),
 					processed: String(chat)
 				});
+
+				if (collection.length > 500) {
+					collection.shift();
+				}
 			}
 		}
 
