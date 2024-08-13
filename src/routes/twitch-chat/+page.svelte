@@ -15,7 +15,6 @@
 				pronoun_id: string;
 		  }[];
 
-	let messages: any[] = $state([]);
 	let pronounCache: {
 		name: string;
 		pronounsAPI: PronounsAPI;
@@ -64,6 +63,12 @@
 	let pronounNames: { display: string; name: string }[] = $state([]);
 	let error = $state(false);
 
+	$effect(() => {
+		if (collection.length) {
+			window.scrollTo(0, document.body.scrollHeight);
+		}
+	});
+
 	onMount(() => {
 		const searchParams = new URLSearchParams(window.location.search);
 		let channel = searchParams.get('channel');
@@ -75,10 +80,6 @@
 			return;
 		}
 
-		ComfyJS.onChat = (user, message, flags, self, extra) => {
-			console.log({ user, message, flags, self, extra });
-			messages.push({ user, message, flags, self, extra });
-		};
 		ComfyJS.Init(channel);
 
 		//chat moderation tools
@@ -602,7 +603,6 @@
 					message: String(message),
 					processed: String(chat)
 				});
-				window.scrollTo(0, document.body.scrollHeight);
 
 				if (collection.length > 500) {
 					collection.shift();
