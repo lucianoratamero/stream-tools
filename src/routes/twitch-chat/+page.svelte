@@ -316,7 +316,7 @@
 						}
 						if (badgeID == 'moderator') {
 							if (FFZbadges !== undefined && FFZbadges?.mod_urls) {
-								usercolor = '<img src="https:' + FFZbadges.mod_urls[1] + '">' + usercolor;
+								usercolor = '<img src="' + FFZbadges.mod_urls[1] + '">' + usercolor;
 							} else {
 								usercolor =
 									'<img src="https://static-cdn.jtvnw.net/badges/v1/3267646d-33f0-4b17-b3df-f923a41db1d0/1 ">' +
