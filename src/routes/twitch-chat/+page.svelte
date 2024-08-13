@@ -4,6 +4,8 @@
 	import { onMount } from 'svelte';
 	// @ts-ignore
 	import tmi from 'tmi.js';
+	import './themes/base.scss';
+	import './themes/pixel.scss';
 
 	type PronounsAPI =
 		| null
@@ -19,6 +21,7 @@
 		pronounsAPI: PronounsAPI;
 	}[] = $state([]);
 	let collection: { id: string; user: string; message: string; processed: string }[] = $state([]);
+	let theme: string | null | undefined = $state();
 	let id = $state(1);
 	let chat = $state([]);
 	let queue = $state([]);
@@ -65,6 +68,7 @@
 		const searchParams = new URLSearchParams(window.location.search);
 		let channel = searchParams.get('channel');
 		let twitch_id = searchParams.get('twitch_id');
+		theme = searchParams.get('theme');
 
 		if (!channel) {
 			error = true;
@@ -598,6 +602,7 @@
 					message: String(message),
 					processed: String(chat)
 				});
+				window.scrollTo(0, document.body.scrollHeight);
 
 				if (collection.length > 500) {
 					collection.shift();
@@ -616,31 +621,10 @@
 	<div>Channel not found :\ Please put the channel name as the `channel` search parameter.</div>
 {/if}
 
-<div id="chat">
+<div id="chat" class={`${theme || ''}`}>
 	{#each collection as item}
 		<div class="message">
 			{@html item.processed}
 		</div>
 	{/each}
 </div>
-
-<style lang="postcss">
-	#chat :global(.message) {
-		& > * {
-			@apply inline-block;
-		}
-
-		:global(.pronoun) {
-			@apply ml-1 rounded border px-1;
-		}
-		:global(.username) {
-			@apply ml-1 font-bold;
-		}
-		:global(span, img) {
-			@apply inline-block;
-		}
-		:global(.message-content) {
-			@apply ml-1;
-		}
-	}
-</style>

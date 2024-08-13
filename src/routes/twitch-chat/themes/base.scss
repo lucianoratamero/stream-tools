@@ -1,0 +1,25 @@
+#chat {
+	@apply flex flex-col;
+}
+
+#chat .message {
+	@apply text-lg;
+
+	& > * {
+		@apply inline-block;
+	}
+
+	.pronoun {
+		@apply ml-1 rounded border px-1;
+	}
+	.username {
+		@apply ml-1 font-bold;
+	}
+	span,
+	img {
+		@apply inline-block;
+	}
+	.message-content {
+		@apply ml-1;
+	}
+}
