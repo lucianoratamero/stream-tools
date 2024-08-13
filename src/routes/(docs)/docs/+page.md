@@ -35,7 +35,7 @@ this page allows you to view the previously selected color palettes. useful for 
 
 this page shows the twitch chat. it's a simple page that uses the twitch chat API to show the chat in real-time.
 
-there are no themes available yet, but you can change the theme by editing the `src/routes/twitch-chat/TwitchChat.svelte` file. I'll be adding themes soon.
+there is only one available theme (`pixel`), but, if you want more, you can change the theme by editing the `src/routes/twitch-chat/TwitchChat.svelte` file. I'll be adding more themes soon.
 
 #### paths
 
@@ -43,7 +43,9 @@ there are no themes available yet, but you can change the theme by editing the `
 
 this page accepts a `channel` search parameter, that is the channel you want to watch the chat from. if you have betterttv or frankerfacez emotes, they will be rendered as well. for betterttv emotes, you need to also pass the `twitch_id` search parameter, which you can find [here](https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/).
 
-example: [https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero](https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero)
+it also accepts a `theme` search parameter, that changes the theme of the chat. the available themes are: `pixel`.
+
+example: [https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero&theme=pixel](https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero&theme=pixel)
 
 ### effects
 
