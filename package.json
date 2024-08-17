@@ -45,6 +45,7 @@
 	"type": "module",
 	"dependencies": {
 		"comfy.js": "^1.1.16",
+		"dat.gui": "^0.7.9",
 		"lodash-es": "^4.17.21",
 		"nice-color-palettes": "^3.0.0",
 		"tmi.js": "^1.8.5"

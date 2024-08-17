@@ -1,12 +1,18 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
-	import scanlines from '$lib/img/scanlines.png';
 	import { onMount } from 'svelte';
 	import Confetti from 'svelte-confetti';
+	import { ScreenEffect, initGUI } from './crt';
+	import './crt/main.scss';
 
 	let crt_effect_enabled = $state(false);
+	let crt_root: HTMLElement | undefined = $state();
+	let crt_effect: ScreenEffect | undefined = $state();
+	let crt_open_gui = $state(false);
+
 	let confetti_effect_enabled = $state(false);
+
 	let bokeh_effect_enabled = $state(false);
 	let bokeh_options: { transparentBg?: string; bookmark?: string; decay?: string } = {};
 	let bokeh_options_string = $derived(new URLSearchParams(bokeh_options).toString());
@@ -16,6 +22,10 @@
 
 		if (search_params.has('crt')) {
 			crt_effect_enabled = true;
+
+			if (search_params.has('openGUI')) {
+				crt_open_gui = true;
+			}
 		}
 		if (search_params.has('confetti')) {
 			confetti_effect_enabled = true;
@@ -33,10 +43,44 @@
 			}
 		}
 	});
+
+	$effect(() => {
+		document.querySelector('.dg.ac')?.remove();
+		if (crt_effect_enabled && crt_root && !crt_effect) {
+			crt_effect = new ScreenEffect('#screen', {
+				effects: {
+					vignette: { enabled: true },
+					vcr: {
+						enabled: true,
+						options: {
+							opacity: 1,
+							miny: 220,
+							miny2: 220,
+							num: 70,
+							fps: 60
+						}
+					},
+					wobbley: { enabled: true },
+					snow: {
+						enabled: true,
+						options: {
+							opacity: 0.2
+						}
+					}
+				}
+			});
+			crt_effect.start();
+			if (crt_open_gui) {
+				initGUI(crt_effect, crt_effect.config);
+			} else {
+				document.querySelector('.dg.ac')?.remove();
+			}
+		}
+	});
 </script>
 
 {#if crt_effect_enabled}
-	<img src={scanlines} class="crt size fixed h-full w-full bg-cover" alt="CRT background effect" />
+	<div id="screen" bind:this={crt_root}></div>
 {/if}
 
 {#if confetti_effect_enabled}
@@ -60,9 +104,3 @@
 		class="fixed h-full w-full bg-cover"
 	></iframe>
 {/if}
-
-<style>
-	.crt {
-		background-size: 100% 1px;
-	}
-</style>
