@@ -443,10 +443,6 @@ export async function initGUI(screen: ScreenEffect, config: Config) {
 					opacity: 0.1
 				}
 			},
-			video: {
-				enabled: false,
-				options: { src: 'http://media.w3.org/2010/05/sintel/trailer.mp4' }
-			},
 			...config.effects
 		}
 	};
@@ -456,7 +452,6 @@ export async function initGUI(screen: ScreenEffect, config: Config) {
 	const f3 = gui.addFolder('VCR');
 	const f4 = gui.addFolder('Roll');
 	const f5 = gui.addFolder('Image');
-	const f6 = gui.addFolder('Video');
 
 	for (const effect of Object.keys(config.effects) as (keyof Effects)[]) {
 		const type = config.effects[effect];
@@ -542,14 +537,6 @@ export async function initGUI(screen: ScreenEffect, config: Config) {
 							} else {
 								(screen.effects[effect]?.node as HTMLElement).style.filter = `blur(${val}px)`;
 							}
-						});
-				}
-
-				if (p === 'src' && effect === 'video') {
-					f6.add(type.options, p)
-						.name(`src`)
-						.onChange((val) => {
-							(screen.effects[effect]?.node as HTMLVideoElement).src = val;
 						});
 				}
 			}
