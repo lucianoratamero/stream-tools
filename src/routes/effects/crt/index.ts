@@ -1,20 +1,70 @@
-// @ts-nocheck
-
 // this is a heavily modified version of the original code
 // thanks to Mobius1 (Karl Saunders) for the original version
 // https://codepen.io/Mobius1/pen/ZNgwbr
 
-function getRandomInt(min, max) {
+type EffectsOptions = {
+	speed?: number;
+	src?: string;
+	blur?: number;
+	opacity?: number;
+	miny?: number;
+	miny2?: number;
+	maxy?: number;
+	num?: number;
+	fps?: number;
+};
+
+type Effect = {
+	enabled: boolean;
+	ctx?: CanvasRenderingContext2D;
+	wrapper?: Element;
+	node?: Element;
+	original?: Element;
+	options?: EffectsOptions;
+	config?: EffectsOptions;
+};
+
+type Effects = {
+	roll?: Effect;
+	image?: Effect;
+	vignette?: Effect;
+	scanlines?: Effect;
+	vcr?: Effect;
+	wobbley?: Effect;
+	wobblex?: Effect;
+	video?: Effect;
+	snow?: Effect;
+};
+
+type Config = {
+	effects: Effects;
+};
+
+function getRandomInt(min: number, max: number) {
 	min = Math.ceil(min);
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 export class ScreenEffect {
-	constructor(parent, options) {
-		this.parent = parent;
+	parent: Element;
+	config: Config;
+	effects: Effects;
+	events: { resize: (e: Event) => void };
+	nodes?: { container: Element; wrapper1: Element; wrapper2: Element; wrapper3: Element };
+	rect?: DOMRect;
+	snowframe?: number;
+	vcrInterval?: number;
+
+	constructor(parent: string | Element, options: Config) {
 		if (typeof parent === 'string') {
-			this.parent = document.querySelector(parent);
+			const node = document.querySelector(parent);
+			if (!node) {
+				throw new Error(`Could not find element with selector: ${parent}`);
+			}
+			this.parent = node;
+		} else {
+			this.parent = parent;
 		}
 
 		this.config = Object.assign(
@@ -54,7 +104,7 @@ export class ScreenEffect {
 
 		container.appendChild(wrapper1);
 
-		this.parent.parentNode.insertBefore(container, this.parent);
+		this.parent.parentNode?.insertBefore(container, this.parent);
 		wrapper3.appendChild(this.parent);
 
 		this.nodes = { container, wrapper1, wrapper2, wrapper3 };
@@ -62,7 +112,7 @@ export class ScreenEffect {
 		this.onResize();
 	}
 
-	onResize(e) {
+	onResize() {
 		this.rect = this.parent.getBoundingClientRect();
 
 		if (this.effects.vcr && !!this.effects.vcr.enabled) {
@@ -70,7 +120,7 @@ export class ScreenEffect {
 		}
 	}
 
-	add(type, options) {
+	add(type: keyof Effects, options?: EffectsOptions) {
 		const config = Object.assign(
 			{},
 			{
@@ -90,18 +140,21 @@ export class ScreenEffect {
 
 		const that = this;
 
+		if (!this.rect) {
+			this.rect = this.parent.getBoundingClientRect();
+		}
+
 		if (type === 'snow') {
 			const canvas = document.createElement('canvas');
-			const ctx = canvas.getContext('2d');
+			const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 			canvas.classList.add(type);
 			canvas.width = this.rect.width / 2;
 			canvas.height = this.rect.height / 2;
-			canvas.style.opacity = config.opacity;
+			canvas.style.opacity = config.opacity?.toString() || (0.2).toString();
 
-			this.nodes.wrapper2.appendChild(canvas);
+			this.nodes?.wrapper2.appendChild(canvas);
 
 			animate();
-			// that.generateSnow(ctx);
 
 			function animate() {
 				that.generateSnow(ctx);
@@ -109,7 +162,7 @@ export class ScreenEffect {
 			}
 
 			this.effects[type] = {
-				wrapper: this.nodes.wrapper2,
+				wrapper: this.nodes?.wrapper2 as Element,
 				node: canvas,
 				enabled: true,
 				config
@@ -125,15 +178,15 @@ export class ScreenEffect {
 		if (type === 'vcr') {
 			const canvas = document.createElement('canvas');
 			canvas.classList.add(type);
-			this.nodes.wrapper2.appendChild(canvas);
+			this.nodes?.wrapper2.appendChild(canvas);
 
 			canvas.width = this.rect.width;
 			canvas.height = this.rect.height;
 
 			this.effects[type] = {
-				wrapper: this.nodes.wrapper2,
+				wrapper: this.nodes?.wrapper2 as Element,
 				node: canvas,
-				ctx: canvas.getContext('2d'),
+				ctx: canvas.getContext('2d') as CanvasRenderingContext2D,
 				enabled: true,
 				config
 			};
@@ -143,31 +196,31 @@ export class ScreenEffect {
 			return this;
 		}
 
-		let node = false;
-		let wrapper = this.nodes.wrapper2;
+		let node;
+		let wrapper = this.nodes?.wrapper2 as Element;
 
 		switch (type) {
 			case 'wobblex':
 			case 'wobbley':
-				wrapper.classList.add(type);
+				wrapper?.classList.add(type);
 				break;
 			case 'scanlines':
 				node = document.createElement('div');
 				node.classList.add(type);
-				wrapper.appendChild(node);
+				wrapper?.appendChild(node);
 				break;
 			case 'vignette':
-				wrapper = this.nodes.container;
+				wrapper = this.nodes?.container as Element;
 				node = document.createElement('div');
 				node.classList.add(type);
-				wrapper.appendChild(node);
+				wrapper?.appendChild(node);
 				break;
 			case 'image':
 				wrapper = this.parent;
 				node = document.createElement('img');
 				node.classList.add(type);
 
-				node.src = config.src;
+				node.src = config.src || '';
 
 				wrapper.appendChild(node);
 				break;
@@ -176,7 +229,7 @@ export class ScreenEffect {
 				node = document.createElement('video');
 				node.classList.add(type);
 
-				node.src = config.src;
+				node.src = config.src || '';
 				node.crossOrigin = 'anonymous';
 				node.autoplay = true;
 				node.muted = true;
@@ -195,9 +248,9 @@ export class ScreenEffect {
 		return this;
 	}
 
-	remove(type) {
+	remove(type: keyof Effects) {
 		const obj = this.effects[type];
-		if (type in this.effects && !!obj.enabled) {
+		if (obj && type in this.effects && !!obj.enabled) {
 			obj.enabled = false;
 
 			if (type === 'roll' && obj.original) {
@@ -209,13 +262,13 @@ export class ScreenEffect {
 			}
 
 			if (type === 'snow') {
-				cancelAnimationFrame(this.snowframe);
+				cancelAnimationFrame(this.snowframe as number);
 			}
 
 			if (obj.node) {
-				obj.wrapper.removeChild(obj.node);
+				obj.wrapper?.removeChild(obj.node);
 			} else {
-				obj.wrapper.classList.remove(type);
+				obj.wrapper?.classList.remove(type);
 			}
 		}
 
@@ -247,12 +300,10 @@ export class ScreenEffect {
 	}
 
 	generateVCRNoise() {
-		const canvas = this.effects.vcr.node;
-		const config = this.effects.vcr.config;
-		const div = this.effects.vcr.node;
+		const config = this.effects.vcr?.config;
 
-		if (config.fps >= 60) {
-			cancelAnimationFrame(this.vcrInterval);
+		if (config?.fps && config?.fps >= 60) {
+			cancelAnimationFrame(this.vcrInterval as number);
 			const animate = () => {
 				this.renderTrackingNoise();
 				this.vcrInterval = requestAnimationFrame(animate);
@@ -261,14 +312,17 @@ export class ScreenEffect {
 			animate();
 		} else {
 			clearInterval(this.vcrInterval);
-			this.vcrInterval = setInterval(() => {
-				this.renderTrackingNoise();
-			}, 1000 / config.fps);
+			this.vcrInterval = setInterval(
+				() => {
+					this.renderTrackingNoise();
+				},
+				1000 / (config?.fps as number)
+			);
 		}
 	}
 
 	// Generate CRT noise
-	generateSnow(ctx) {
+	generateSnow(ctx: CanvasRenderingContext2D) {
 		var w = ctx.canvas.width,
 			h = ctx.canvas.height,
 			d = ctx.createImageData(w, h),
@@ -282,14 +336,17 @@ export class ScreenEffect {
 		ctx.putImageData(d, 0, 0);
 	}
 
-	renderTrackingNoise(radius = 2, xmax, ymax) {
-		const canvas = this.effects.vcr.node;
-		const ctx = this.effects.vcr.ctx;
+	renderTrackingNoise(radius: number | undefined = 2, xmax?: number, ymax?: number) {
+		if (!this.effects.vcr) {
+			return;
+		}
+		const canvas = this.effects.vcr.node as HTMLCanvasElement;
+		const ctx = this.effects.vcr.ctx as CanvasRenderingContext2D;
 		const config = this.effects.vcr.config;
-		let posy1 = config.miny || 0;
-		let posy2 = config.maxy || canvas.height;
-		let posy3 = config.miny2 || 0;
-		const num = config.num || 20;
+		let posy1 = config?.miny || 0;
+		let posy2 = config?.maxy || canvas.height;
+		let posy3 = config?.miny2 || 0;
+		const num = config?.num || 20;
 
 		if (xmax === undefined) {
 			xmax = canvas.width;
@@ -299,13 +356,13 @@ export class ScreenEffect {
 			ymax = canvas.height;
 		}
 
-		canvas.style.filter = `blur(${config.blur}px)`;
+		canvas.style.filter = `blur(${config?.blur || 0}px)`;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.fillStyle = `#fff`;
 
 		ctx.beginPath();
 		for (var i = 0; i <= num; i++) {
-			var x = Math.random(i) * xmax;
+			var x = Math.random() * xmax;
 			var y1 = getRandomInt((posy1 += 3), posy2);
 			var y2 = getRandomInt(0, (posy3 -= 3));
 			ctx.fillRect(x, y1, radius, radius);
@@ -318,7 +375,7 @@ export class ScreenEffect {
 		ctx.closePath();
 	}
 
-	renderTail(ctx, x, y, radius) {
+	renderTail(ctx: CanvasRenderingContext2D, x: number, y: number, radius: number) {
 		const n = getRandomInt(1, 50);
 
 		const dirs = [1, -1];
@@ -339,16 +396,16 @@ export class ScreenEffect {
 	}
 
 	start() {
-		for (const prop in this.config.effects) {
-			if (!!this.config.effects[prop].enabled) {
-				this.add(prop, this.config.effects[prop].options);
+		for (const prop of Object.keys(this.config.effects) as (keyof Effects)[]) {
+			if (Boolean(this.config.effects[prop]?.enabled)) {
+				this.add(prop, this.config.effects[prop]?.options);
 			}
 		}
 		this.render();
 	}
 }
 
-export async function initGUI(screen, config) {
+export async function initGUI(screen: ScreenEffect, config: Config) {
 	const dat = await import('dat.gui');
 	const gui = new dat.GUI();
 
@@ -395,13 +452,17 @@ export async function initGUI(screen, config) {
 	const f4 = gui.addFolder('Roll');
 	const f5 = gui.addFolder('Image');
 
-	for (const effect in config.effects) {
+	for (const effect of Object.keys(config.effects) as (keyof Effects)[]) {
 		const type = config.effects[effect];
+		if (!type) {
+			continue;
+		}
+
 		f1.add(type, 'enabled')
 			.name(effect)
-			.onChange((bool) => {
+			.onChange((bool: boolean) => {
 				if (bool) {
-					screen.add(effect, config.effects[effect].options);
+					screen.add(effect, config.effects[effect]?.options);
 				} else {
 					screen.remove(effect);
 				}
@@ -416,7 +477,7 @@ export async function initGUI(screen, config) {
 						.step(1)
 						.max(10000)
 						.onChange((val) => {
-							screen.effects[effect].node.style.animationDuration = `${val}ms`;
+							(screen.effects[effect]?.node as HTMLElement).style.animationDuration = `${val}ms`;
 						});
 				}
 
@@ -430,7 +491,7 @@ export async function initGUI(screen, config) {
 						.onChange((val) => {
 							console.log(val);
 
-							screen.effects[effect].node.style.opacity = val;
+							(screen.effects[effect]?.node as HTMLElement).style.opacity = val;
 						});
 				}
 
@@ -442,8 +503,10 @@ export async function initGUI(screen, config) {
 						.step(0.1)
 						.max(400)
 						.onChange((val) => {
-							screen.effects[effect].config.miny = val;
-							screen.effects[effect].config.miny2 = 400 - val;
+							if (screen.effects[effect]?.config) {
+								screen.effects[effect].config.miny = val;
+								screen.effects[effect].config.miny2 = 400 - val;
+							}
 						});
 				}
 
@@ -455,7 +518,9 @@ export async function initGUI(screen, config) {
 						.step(0.1)
 						.max(100)
 						.onChange((val) => {
-							screen.effects[effect].config.num = val;
+							if (screen.effects[effect]?.config) {
+								screen.effects[effect].config.num = val;
+							}
 						});
 				}
 
@@ -466,10 +531,10 @@ export async function initGUI(screen, config) {
 						.step(0.1)
 						.max(5)
 						.onChange((val) => {
-							if (effect === 'vcr') {
+							if (effect === 'vcr' && screen.effects[effect]?.config) {
 								screen.effects[effect].config.blur = val;
 							} else {
-								screen.effects[effect].node.style.filter = `blur(${val}px)`;
+								(screen.effects[effect]?.node as HTMLElement).style.filter = `blur(${val}px)`;
 							}
 						});
 				}
@@ -484,12 +549,12 @@ export async function initGUI(screen, config) {
 	f5.open();
 
 	setTimeout(() => {
-		for (const prop in screen.effects) {
-			screen.remove(prop);
+		for (const effect of Object.keys(screen.effects) as (keyof Effects)[]) {
+			screen.remove(effect);
 		}
-		for (const prop in config.effects) {
-			if (!!config.effects[prop].enabled) {
-				screen.add(prop, config.effects[prop].options);
+		for (const effect of Object.keys(screen.effects) as (keyof Effects)[]) {
+			if (!!config.effects[effect]?.enabled) {
+				screen.add(effect, config.effects[effect].options);
 			}
 		}
 	}, 1000);

@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import Confetti from 'svelte-confetti';
-	import { ScreenEffect, initGUI } from './crt';
+	import { ScreenEffect, initGUI } from './crt/index';
 	import './crt/main.scss';
 
 	let crt_effect_enabled = $state(false);
