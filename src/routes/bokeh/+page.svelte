@@ -1,14 +1,12 @@
-
-<svelte:head>
-	<title>stream-tools: bokeh</title>
-</svelte:head>
-
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 	import BokehPage from '$lib/components/BokehPage.svelte';
-	import Button from '$lib/components/Button.svelte';
 	import PaletteCard from '$lib/components/PaletteCard.svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import * as Card from '$lib/components/ui/card/index.js';
+	import Input from '$lib/components/ui/input/input.svelte';
+	import Label from '$lib/components/ui/label/label.svelte';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { isEqual } from 'lodash-es';
@@ -93,27 +91,30 @@
 	});
 </script>
 
-{#if showForm}
-	<form
-		in:fade
-		class="fixed right-4 top-4 z-10 flex flex-col gap-2 rounded-lg bg-white p-4 shadow-xl"
-	>
-		<p>Click on the canvas to hide the form :]</p>
-		<p>
-			Decay (recommended: between 0.2 and 1.8):
-			<input class="border p-1" bind:value={decay} />
-		</p>
-		<div class="flex gap-2">
-			<Button onclick={changePallette}>Change color palette</Button>
-			<Button onclick={goFullscreen}>Go fullscreen</Button>
-		</div>
-		<div class="flex gap-2">
-			<Button href={`${base}/bokeh/history`}>See history</Button>
-			<Button href={`${base}/bokeh/create`}>Create palette</Button>
-		</div>
+<svelte:head>
+	<title>stream-tools: bokeh</title>
+</svelte:head>
 
-		<section class="my-2">
-			<h2 class="text-lg">Current palette</h2>
+{#if showForm}
+	<Card.Root class="fixed right-4 top-4 z-10">
+		<Card.Header>
+			<Card.Title>Options</Card.Title>
+			<Card.Description>Click on the canvas to hide the form :]</Card.Description>
+		</Card.Header>
+		<Card.Content>
+			<Label>
+				Decay (recommended: between 0.2 and 1.8):
+				<Input class="border p-1" bind:value={decay} />
+			</Label>
+			<div class="my-4 flex gap-2">
+				<Button onclick={changePallette}>Change color palette</Button>
+				<Button onclick={goFullscreen}>Go fullscreen</Button>
+			</div>
+			<div class="flex gap-2">
+				<Button href={`${base}/bokeh/history`}>See history</Button>
+				<Button href={`${base}/bokeh/create`}>Create palette</Button>
+			</div>
+
 			<PaletteCard
 				isPlaceholder
 				palette={colorPalette}
@@ -124,39 +125,41 @@
 				bind:bookmarks
 				bind:colorPalette
 			/>
-		</section>
 
-		<h2 class="text-lg">Bookmarks</h2>
-		<div class="grid grid-cols-3 gap-2">
-			{#each bookmarks as { name }, i}
-				<span class="flex" in:fade>
-					<Button
-						class="flex grow items-center justify-between gap-2 rounded-r-none border-r-0"
-						href={`${base}/bokeh?bookmark=${name}`}
-					>
-						{name || `Bookmark ${i + 1}`}
-					</Button>
-					<Button
-						type="button"
-						class="rounded-l-none border-red-800 bg-red-300"
-						title="Remove bookmark"
-						onclick={() => (bookmarks = bookmarks.filter((item) => item.name !== name))}
-					>
-						<Icon src={Trash} class="h-4 w-4" />
-					</Button>
-				</span>
-			{:else}
-				<div class="text-center col-span-3">
-					<p class="text-gray-500 mb-2">No bookmarks yet</p>
-					<p>
-						<Button href={`${base}/bokeh/create`}>Create one</Button>
-						<span class="px-2">or</span>
-						<Button href={`${base}/bokeh/history`}>See history</Button>
-					</p>
-				</div>
-			{/each}
-		</div>
-	</form>
+			<hr class="my-2" />
+			<h2 class="text-lg">Bookmarks</h2>
+			<div class="grid grid-cols-3 gap-2">
+				{#each bookmarks as { name }, i}
+					<span class="flex" in:fade>
+						<Button
+							variant="outline"
+							class="flex grow items-center justify-between gap-2 rounded-r-none border-r-0"
+							href={`${base}/bokeh?bookmark=${name}`}
+						>
+							{name || `Bookmark ${i + 1}`}
+						</Button>
+						<Button
+							variant="destructive"
+							class="rounded-l-none"
+							title="Remove bookmark"
+							onclick={() => (bookmarks = bookmarks.filter((item) => item.name !== name))}
+						>
+							<Icon src={Trash} class="h-4 w-4" />
+						</Button>
+					</span>
+				{:else}
+					<div class="text-center col-span-3">
+						<p class="text-gray-500 mb-2">No bookmarks yet</p>
+						<p>
+							<Button href={`${base}/bokeh/create`}>Create one</Button>
+							<span class="px-2">or</span>
+							<Button href={`${base}/bokeh/history`}>See history</Button>
+						</p>
+					</div>
+				{/each}
+			</div>
+		</Card.Content>
+	</Card.Root>
 {/if}
 
 <BokehPage {numberOfCircles} {colorPalette} {transparentBg} {decay} bind:showForm />
