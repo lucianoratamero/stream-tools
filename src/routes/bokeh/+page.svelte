@@ -86,8 +86,6 @@
 			}
 		}
 	});
-
-	$inspect(numberOfCircles);
 </script>
 
 {#if showForm}
