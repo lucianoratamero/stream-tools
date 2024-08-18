@@ -1,4 +1,8 @@
 
+<svelte:head>
+	<title>stream-tools: docs</title>
+</svelte:head>
+
 # stream-tools
 
 this is a set of pages with effects that I use on my twitch streams. you don't need to redeploy the app, since they can be accessed on https://lucianoratamero.github.io/stream-tools/ and added to your OBS (or whatever you use) as a browser source.

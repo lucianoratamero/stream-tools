@@ -23,7 +23,9 @@
 			return '00:00:00';
 		}
 
-		return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+		const formatted_time = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+		document.title = `${formatted_time} - stream-tools: timer`;
+		return formatted_time;
 	}
 
 	onMount(() => {
@@ -50,6 +52,10 @@
 		return () => clearInterval(interval);
 	});
 </script>
+
+<svelte:head>
+	<title>stream-tools: timer</title>
+</svelte:head>
 
 {#if show_timer}
 	<div class="flex h-screen flex-col items-center justify-center text-white">

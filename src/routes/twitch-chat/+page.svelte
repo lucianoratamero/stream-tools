@@ -616,6 +616,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>stream-tools: twitch chat</title>
+</svelte:head>
+
 {#if error}
 	<div>Channel not found :\ Please put the channel name as the `channel` search parameter.</div>
 {/if}

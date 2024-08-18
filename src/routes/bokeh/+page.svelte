@@ -1,3 +1,8 @@
+
+<svelte:head>
+	<title>stream-tools: bokeh</title>
+</svelte:head>
+
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';

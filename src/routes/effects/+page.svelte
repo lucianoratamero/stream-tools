@@ -1,3 +1,8 @@
+
+<svelte:head>
+	<title>stream-tools: effects</title>
+</svelte:head>
+
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
