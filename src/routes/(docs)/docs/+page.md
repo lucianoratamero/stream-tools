@@ -7,6 +7,12 @@ they may work on any setup, as long as you follow the docs ;]
 
 if you have any questions, just open an issue and I'll answer it when I can :)
 
+## options
+
+all options for the pages are passed as search parameters. you don't really need to know what search parameters are - they are just options passed in the URL. but if you want to know more about them, you can read [this](https://en.wikipedia.org/wiki/Query_string).
+
+a good example of a search parameter is `?channel=luciano_ratamero`. this is a search parameter that tells the page to load the chat from the `luciano_ratamero` channel. if you needed to pass more options, you could do it like this: `?channel=luciano_ratamero&theme=pixel`, by adding a `&` character before each one of them.
+
 ## pages
 
 ### bokeh-experiments
@@ -60,6 +66,8 @@ this page offers an overlay with effects. each effect is enabled by its own sear
 #### paths
 
 ##### `/effects/`
+
+by default, the page doesn't have any effects enabled. you can enable them by passing search parameters.
 
 ###### `CRT`
 
