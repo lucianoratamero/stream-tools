@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ComfyJS, { type OnMessageExtra } from 'comfy.js';
 	import { onMount } from 'svelte';
+	import { fade, slide } from 'svelte/transition';
 	// @ts-ignore
 	import tmi from 'tmi.js';
 	import './themes/base.scss';
@@ -61,6 +62,7 @@
 	let BTTVglobalemoticons = $state({});
 	let pronounNames: { display: string; name: string }[] = $state([]);
 	let error = $state(false);
+	let align: string | undefined = $state();
 
 	$effect(() => {
 		if (collection.length) {
@@ -72,6 +74,8 @@
 		const searchParams = new URLSearchParams(window.location.search);
 		let channel = searchParams.get('channel');
 		let twitch_id = searchParams.get('twitch_id');
+		let message_screen_time = searchParams.get('messageScreenTime');
+		align = searchParams.get('align') || 'top';
 		theme = searchParams.get('theme');
 
 		if (!channel) {
@@ -596,12 +600,19 @@
 				// Adds a the current time to the start of message and gives it to array
 				let chat = `<span class="badges">${usercolor}</span><span class="separator">:</span><span class="message-content">${emotes}</span>`;
 
-				collection.push({
+				const item = {
 					id: String(id),
 					user: String(user),
 					message: String(message),
 					processed: String(chat)
-				});
+				};
+				collection.push(item);
+
+				if (message_screen_time) {
+					setTimeout(() => {
+						collection = collection.filter((x) => x.message !== item.message);
+					}, Number(message_screen_time));
+				}
 
 				if (collection.length > 500) {
 					collection.shift();
@@ -624,9 +635,9 @@
 	<div>Channel not found :\ Please put the channel name as the `channel` search parameter.</div>
 {/if}
 
-<div id="chat" class={`${theme || ''}`}>
-	{#each collection as item}
-		<div class="message">
+<div id="chat" class={`${theme || ''} ${align === 'bottom' ? 'justify-end' : ''} flex h-screen`}>
+	{#each collection as item (item.message)}
+		<div class="message" in:fade={{ duration: 150 }} out:slide>
 			{@html item.processed}
 		</div>
 	{/each}
