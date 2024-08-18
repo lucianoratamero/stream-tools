@@ -75,7 +75,7 @@
 		let channel = searchParams.get('channel');
 		let twitch_id = searchParams.get('twitch_id');
 		let message_screen_time = searchParams.get('messageScreenTime');
-		align = searchParams.get('align') || 'top';
+		align = searchParams.get('align') || 'bottom';
 		theme = searchParams.get('theme');
 
 		if (!channel) {
@@ -635,7 +635,10 @@
 	<div>Channel not found :\ Please put the channel name as the `channel` search parameter.</div>
 {/if}
 
-<div id="chat" class={`${theme || ''} ${align === 'bottom' ? 'justify-end' : ''} flex h-screen`}>
+<div
+	id="chat"
+	class={`${theme || ''} ${align === 'top' ? 'flex-col-reverse justify-start' : 'flex-col justify-end'} flex h-screen`}
+>
 	{#each collection as item (item.message)}
 		<div class="message" in:fade={{ duration: 150 }} out:slide>
 			{@html item.processed}

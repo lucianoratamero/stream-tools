@@ -75,7 +75,9 @@ this page accepts a `channel` search parameter, that is the channel you want to 
 
 it also accepts a `theme` search parameter, that changes the theme of the chat. the available themes are: `pixel`.
 
-it also receives a `messageScreenTime` search parameter, that changes how long the messages are displayed on the screen
+it also receives a `messageScreenTime` search parameter, that changes how long the messages are displayed on the screen.
+
+it also receives an `align` search parameter, that changes the alignment of the chat. the available alignments are: `top`, `bottom`. defaults to `bottom`.
 
 example: [https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero&theme=pixel](https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero&theme=pixel)
 
