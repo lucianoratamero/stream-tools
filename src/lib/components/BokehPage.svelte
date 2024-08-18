@@ -53,7 +53,10 @@
 				.filter((node: Node) => node.opacity > 0)
 				.map((node) => renderFunctions[type]({ node, context, decay }));
 
-			if (currentNodes.length < numberOfNodes && Math.random() < (decay > 1 ? 1 : decay * 0.5)) {
+			if (
+				currentNodes.length < numberOfNodes &&
+				Math.random() * 2 < (decay > 1 ? 1 : decay * 0.5)
+			) {
 				if (type === 'svg' && svgContent) {
 					currentNodes.push(emptyNode[type](svgContent));
 				} else if (type === 'circle' && colorPalette) {
