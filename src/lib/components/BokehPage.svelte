@@ -6,6 +6,7 @@
 	type BaseProps = {
 		showForm: boolean;
 		decay: number;
+		numberOfCircles?: number;
 		transparentBg?: boolean;
 		isWrapped?: boolean;
 	};
@@ -29,12 +30,19 @@
 		svgContent,
 		decay,
 		transparentBg,
+		numberOfCircles,
 		isWrapped
 	}: Props = $props();
 	let currentNodes: Node[] = $state([]);
-	let numberOfNodes = $state(0);
+	let numberOfNodes = $state(numberOfCircles || 0);
 	let canvas: HTMLCanvasElement | null = $state(null);
 	let windowSize: { width: number; height: number } | undefined = $state();
+
+	$effect(() => {
+		if (numberOfCircles) {
+			numberOfNodes = numberOfCircles;
+		}
+	});
 
 	const render = () => {
 		const context = canvas?.getContext('2d') as CanvasRenderingContext2D;
@@ -66,8 +74,10 @@
 			height = canvas?.parentElement?.clientHeight as number;
 		}
 
-		numberOfNodes =
-			width > height ? (width / height) * NODES_MULTIPLIER : (height / width) * NODES_MULTIPLIER;
+		if (!numberOfCircles) {
+			numberOfNodes =
+				width > height ? (width / height) * NODES_MULTIPLIER : (height / width) * NODES_MULTIPLIER;
+		}
 		windowSize = { width, height };
 
 		window.onresize = () => {
@@ -80,8 +90,12 @@
 			}
 
 			windowSize = { width, height };
-			numberOfNodes =
-				width > height ? (width / height) * NODES_MULTIPLIER : (height / width) * NODES_MULTIPLIER;
+			if (!numberOfCircles) {
+				numberOfNodes =
+					width > height
+						? (width / height) * NODES_MULTIPLIER
+						: (height / width) * NODES_MULTIPLIER;
+			}
 		};
 		requestAnimationFrame(render);
 	});

@@ -19,7 +19,13 @@ this was the first effect, previously implemented in Imba, now in Svelte 5 + can
 
 if you click the background, a form appears with settings that are saved on the localStorage.
 
-this page accepts a `bookmark` search parameter, that loads a previously saved bookmark. it also accepts a `decay` param, that changes how fast the circles disappear (it makes the animation faster).
+this page accepts a `bookmark` search parameter, that loads a previously saved bookmark.
+
+it also accepts a `decay` param, that changes how fast the circles disappear (it makes the animation faster).
+
+this page also accepts a `numberOfCircles` search parameter, that changes the number limit of circles rendered.
+
+it also accepts a `transparentBg` search parameter, that makes the background transparent.
 
 example: [https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=1.5](https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=1.5)
 

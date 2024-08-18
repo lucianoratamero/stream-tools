@@ -14,7 +14,12 @@
 	let confetti_effect_enabled = $state(false);
 
 	let bokeh_effect_enabled = $state(false);
-	let bokeh_options: { transparentBg?: string; bookmark?: string; decay?: string } = {};
+	let bokeh_options: {
+		transparentBg?: string;
+		bookmark?: string;
+		decay?: string;
+		numberOfCircles?: string;
+	} = {};
 	let bokeh_options_string = $derived(new URLSearchParams(bokeh_options).toString());
 
 	onMount(() => {
@@ -40,6 +45,9 @@
 			}
 			if (search_params.has('decay')) {
 				bokeh_options.decay = search_params.get('decay') as string;
+			}
+			if (search_params.has('numberOfCircles')) {
+				bokeh_options.numberOfCircles = search_params.get('numberOfCircles') as string;
 			}
 		}
 	});

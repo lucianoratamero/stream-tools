@@ -18,6 +18,7 @@
 	let transparentBg = $state(false);
 	let decay = $state(0.4);
 	let placeholderName = $state('');
+	let numberOfCircles = $state(0);
 
 	const changePallette = () => {
 		colorPalette = colorPalettes[Math.floor(Math.random() * 1000)];
@@ -60,6 +61,10 @@
 		if ($page.url.searchParams.has('decay')) {
 			decay = Number($page.url.searchParams.get('decay') as string);
 		}
+
+		if ($page.url.searchParams.has('numberOfCircles')) {
+			numberOfCircles = Number($page.url.searchParams.get('numberOfCircles') as string);
+		}
 	});
 
 	$effect(() => {
@@ -81,6 +86,8 @@
 			}
 		}
 	});
+
+	$inspect(numberOfCircles);
 </script>
 
 {#if showForm}
@@ -149,4 +156,4 @@
 	</form>
 {/if}
 
-<BokehPage {colorPalette} {transparentBg} {decay} bind:showForm />
+<BokehPage {numberOfCircles} {colorPalette} {transparentBg} {decay} bind:showForm />
