@@ -3,7 +3,21 @@
 	<title>stream-tools: docs</title>
 </svelte:head>
 
-# stream-tools
+<script lang="ts">
+		import { base } from '$app/paths';
+</script>
+
+<div class="sticky top-0 py-4 bg-white">
+	<h1 class="mb-2">stream-tools</h1>
+	<nav class="flex flex-wrap items-center gap-4">
+			<a href={`${base}/`}>home</a>
+			<a href={`${base}/docs/`}>docs</a>
+			<a href={`${base}/bokeh/?bookmark=dark-pink&decay=1.5`}>bokeh</a>
+			<a href={`${base}/effects/?crt`}>effects</a>
+			<a href={`${base}/twitch-chat/?channel=luciano_ratamero&theme=pixel`}>twitch chat</a>
+			<a href={`${base}/timer/?timeInSeconds=5`}>timer</a>
+	</nav>
+</div>
 
 this is a set of pages with effects that I use on my twitch streams. you don't need to redeploy the app, since they can be accessed on https://lucianoratamero.github.io/stream-tools/ and added to your OBS (or whatever you use) as a browser source.
 

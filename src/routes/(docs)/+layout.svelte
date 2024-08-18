@@ -2,6 +2,6 @@
 	let { children } = $props();
 </script>
 
-<div class="prose mx-auto py-8 px-4 text-2xl">
+<div class="prose mx-auto break-words px-4 pb-8 md:text-2xl">
 	{@render children()}
 </div>
