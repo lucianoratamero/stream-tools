@@ -59,6 +59,8 @@ this page offers an overlay with effects. each effect is enabled by its own sear
 
 this effect is enabled by passing the `crt` search param. it loads a CRT texture, emulating old computer monitors/tvs.
 
+this effect also accepts a `openGUI` search param, that opens a form with settings.
+
 example: [https://lucianoratamero.github.io/stream-tools/effects/?crt](https://lucianoratamero.github.io/stream-tools/effects/?crt)
 
 ###### `Confetti`
