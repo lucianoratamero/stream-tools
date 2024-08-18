@@ -1,7 +1,7 @@
 <script lang="ts">
 	import BokehPage from '$lib/components/BokehPage.svelte';
-	import Button from '$lib/components/Button.svelte';
 	import PaletteCard from '$lib/components/PaletteCard.svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
 	import colorPalettes from 'nice-color-palettes/1000.json';
 	import { onMount } from 'svelte';
 

@@ -80,18 +80,18 @@
 		<div>
 			{#key name}
 				{#if !isPlaceholder}
-					<Button class="w-full" onclick={() => (colorPalette = palette)}>Preview</Button>
+					<Button class="mb-2 w-full" onclick={() => (colorPalette = palette)}>Preview</Button>
 				{/if}
 				{#if name?.length && bookmarks.find((i) => i.name === name)}
 					<Button
-						class="w-full"
+						class="mb-2 w-full"
 						onclick={() => (bookmarks = bookmarks.filter((i) => i.name !== name))}
 					>
 						Remove bookmark
 					</Button>
 				{:else}
 					<Button
-						class="w-full"
+						class="mb-2 w-full"
 						disabled={!name?.length || !slugRegex.test(name)}
 						title="To add to bookmarks, please provide a name"
 						onclick={() => bookmarks.push({ colorPalette: palette, name })}

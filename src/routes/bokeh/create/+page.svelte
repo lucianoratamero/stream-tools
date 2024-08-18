@@ -2,7 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import BokehPage from '$lib/components/BokehPage.svelte';
-	import Button from '$lib/components/Button.svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import Input from '$lib/components/ui/input/input.svelte';
 	import colorPalettes from 'nice-color-palettes/1000.json';
 	import { onMount } from 'svelte';
 
@@ -74,6 +75,7 @@
 								>
 									{#each colorPalettes as colors, i}
 										<Button
+											variant="outline"
 											class="flex flex-col"
 											onclick={() => {
 												newColorPalette = colors;
@@ -117,9 +119,8 @@
 			{/if}
 			{#if newColorPalette}
 				<div class="mt-4 rounded border p-4">
-					<div class="flex justify-between">
-						<input
-							class="rounded border p-2"
+					<div class="flex gap-2 justify-between">
+						<Input
 							pattern="^[a-z0-9]+(?:-[a-z0-9]+)*$"
 							placeholder="Name"
 							bind:value={newColorPaletteName}
@@ -129,11 +130,11 @@
 								title="To add to bookmarks, please provide a name as slug"
 								disabled={!newColorPaletteName?.length || !slugRegex.test(newColorPaletteName)}
 								onclick={() => {
-								bookmarks.push({
-									colorPalette: newColorPalette as string[],
-									name: newColorPaletteName as string
-								});
-								goto(`${base}/?bookmark=${newColorPaletteName}`);
+									bookmarks.push({
+										colorPalette: newColorPalette as string[],
+										name: newColorPaletteName as string
+									});
+									goto(`${base}/?bookmark=${newColorPaletteName}`);
 								}}
 							>
 								Save to bookmarks
@@ -142,7 +143,7 @@
 					</div>
 					<div class="grid h-24 w-full grid-cols-5 gap-2 pt-2">
 						{#each newColorPalette as _, i}
-							<input type="color" class="h-full w-full" bind:value={newColorPalette[i]} />
+							<Input type="color" class="h-full w-full" bind:value={newColorPalette[i]} />
 						{/each}
 					</div>
 				</div>
