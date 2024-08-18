@@ -108,6 +108,7 @@
 	<canvas
 		class="absolute m-0 overflow-hidden"
 		class:bg-zinc-900={!transparentBg}
+		class:opacity-50={transparentBg}
 		onclick={() => (showForm = !showForm)}
 		style={!showForm ? 'cursor: none' : ''}
 		bind:this={canvas}
