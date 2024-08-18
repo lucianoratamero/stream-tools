@@ -14,7 +14,7 @@
 			<a href={`${base}/docs/`}>docs</a>
 			<a href={`${base}/bokeh/?bookmark=dark-pink&decay=1.5`}>bokeh</a>
 			<a href={`${base}/effects/?crt`}>effects</a>
-			<a href={`${base}/twitch-chat/?channel=luciano_ratamero&theme=pixel`}>twitch chat</a>
+			<a href={`${base}/twitch-chat/?channel=luciano_ratamero&theme=pixel&messageScreenTime=6000`}>twitch chat</a>
 			<a href={`${base}/timer/?timeInSeconds=5`}>timer</a>
 	</nav>
 </div>
@@ -79,7 +79,7 @@ it also receives a `messageScreenTime` search parameter, that changes how long t
 
 it also receives an `align` search parameter, that changes the alignment of the chat. the available alignments are: `top`, `bottom`. defaults to `bottom`.
 
-example: [https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero&theme=pixel](https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero&theme=pixel)
+example: [https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero&theme=pixel&messageScreenTime=6000](https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero&theme=pixel&messageScreenTime=6000)
 
 ### effects
 
