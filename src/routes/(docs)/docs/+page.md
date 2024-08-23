@@ -14,6 +14,8 @@
 	</nav>
 </div>
 
+*também disponível em [português](/docs/pt-br)*
+
 this is a set of pages with effects that I use on my twitch streams. you don't need to redeploy the app, since they can be accessed on https://lucianoratamero.github.io/stream-tools/ and added to your OBS (or whatever you use) as a browser source.
 
 they may work on any setup, as long as you follow the docs ;]
