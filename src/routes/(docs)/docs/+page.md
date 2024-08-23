@@ -1,21 +1,16 @@
-
 <svelte:head>
 	<title>stream-tools: docs</title>
 </svelte:head>
 
 <script lang="ts">
-		import { base } from '$app/paths';
+	import NavLinks from '$lib/components/NavLinks.svelte';
 </script>
 
-<div class="sticky top-0 py-4 bg-white">
+<div
+	class="fixed md:sticky md:top-0 md:block w-full flex left-0 flex-col justify-center items-center bottom-0 py-4 bg-white">
 	<h1 class="mb-2">stream-tools</h1>
-	<nav class="flex flex-wrap items-center gap-4">
-			<a href={`${base}/`}>home</a>
-			<a href={`${base}/docs/`}>docs</a>
-			<a href={`${base}/bokeh/?bookmark=dark-pink&decay=1.5`}>bokeh</a>
-			<a href={`${base}/effects/?crt`}>effects</a>
-			<a href={`${base}/twitch-chat/?channel=luciano_ratamero&theme=pixel&messageScreenTime=6000`}>twitch chat</a>
-			<a href={`${base}/timer/?timeInSeconds=5`}>timer</a>
+	<nav class="flex md:justify-start md:gap-4 flex-wrap justify-center items-center gap-2">
+		<NavLinks />
 	</nav>
 </div>
 
@@ -138,3 +133,5 @@ npm run dev
 # build to production
 npm run build
 ```
+
+<div class="pb-24 md:p-0"></div>

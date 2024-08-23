@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import { GithubLogo, TwitterLogo } from '@steeze-ui/radix-icons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import NavLinks from '$lib/components/NavLinks.svelte';
 </script>
 
 <div class="flex h-screen flex-col gap-4 md:flex-row">
 	<div class="flex flex-col">
-		<h1 class="text-[10rem] leading-none">Tools</h1>
+		<h1 class="text-8xl md:text-[10rem] leading-none">Tools</h1>
 		<ul class="flex gap-4">
 			<li>
 				<a href="https://github.com/lucianoratamero/stream-tools" target="_blank">
@@ -27,7 +27,7 @@
 					>
 						<title>twitch [#182]</title>
 						<desc>Created with Sketch.</desc>
-						<defs> </defs>
+						<defs></defs>
 						<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 							<g
 								id="Dribbble-Light-Preview"
@@ -53,21 +53,7 @@
 			</li>
 		</ul>
 	</div>
-	<ul class="text-8xl">
-		<li>
-			<a href={`${base}/docs`}>Docs</a>
-		</li>
-		<li>
-			<a href={`${base}/bokeh`}>Bokeh</a>
-		</li>
-		<li>
-			<a href={`${base}/effects`}>Effects</a>
-		</li>
-		<li>
-			<a href={`${base}/timer?timeInSeconds=120`}>Timer</a>
-		</li>
-		<li>
-			<a href={`${base}/twitch-chat?channel=luciano_ratamero`}>Twitch Chat</a>
-		</li>
-	</ul>
+	<nav class="text-4xl md:text-8xl flex flex-col">
+		<NavLinks />
+	</nav>
 </div>
