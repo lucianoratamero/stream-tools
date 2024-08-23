@@ -1,4 +1,4 @@
-import ComfyJS, { type OnMessageExtra } from 'comfy.js';
+import { type OnMessageExtra } from 'comfy.js';
 // @ts-expect-error
 import tmi from 'tmi.js';
 
@@ -138,8 +138,6 @@ export function init({
 			throw err;
 		});
 
-	ComfyJS.Init(channel);
-
 	//chat moderation tools
 	const client = new tmi.Client({
 		connection: {
@@ -149,6 +147,10 @@ export function init({
 		channels: [channel]
 	});
 	client.connect();
+
+	client.on('message', (_channel: string, tags: any, message: string, _self: boolean) => {
+		processPronouns(message, tags['username'], tags);
+	});
 
 	client.on('clearchat', () => {
 		console.log('chat cleared');
@@ -200,18 +202,18 @@ export function init({
 	});
 
 	//API calling
-
-	ComfyJS.onChat = (user, message, _flags, _self, extra) => {
-		processPronouns(message, user, extra);
-	};
-
 	return {
-		ComfyJS,
 		client
 	};
 }
 
-export function processPronouns(message: string, user: string, extra: OnMessageExtra) {
+export function processPronouns(
+	message: string,
+	user: string,
+	extra: OnMessageExtra & {
+		badges: Record<string, any>;
+	}
+) {
 	let pronounFilter = pronounCache.filter(function (x: { name: string }) {
 		return x.name == user;
 	});
@@ -237,7 +239,11 @@ export function processPronouns(message: string, user: string, extra: OnMessageE
 	}
 }
 
-function processMessage(message: string, user: string, extra: OnMessageExtra) {
+function processMessage(
+	message: string,
+	user: string,
+	extra: OnMessageExtra & { badges: Record<string, any> }
+) {
 	// Looks for popular chatbots and filters them out
 	if (
 		user === 'StreamElements' ||
@@ -269,10 +275,10 @@ function processMessage(message: string, user: string, extra: OnMessageExtra) {
 			}
 		}
 		// Adds badges to the name if enabled in config.js--
-		if (!extra.userBadges || Object.keys(extra.userBadges).length === 0) {
+		if (!extra.badges || Object.keys(extra.badges).length === 0) {
 			console.log('No user badge');
 		} else {
-			let values = Object.keys(extra.userBadges);
+			let values = Object.keys(extra.badges);
 			// use Twitch API with badgesList, to make things future prove
 			for (let i = values.length; i >= 0; i--) {
 				let badgeID = values[i];

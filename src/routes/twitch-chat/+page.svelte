@@ -28,10 +28,9 @@
 			return;
 		}
 
-		const { ComfyJS, client } = init({ channel, twitch_id, message_screen_time });
+		const { client } = init({ channel, twitch_id, message_screen_time });
 
 		return () => {
-			ComfyJS.Disconnect();
 			client.disconnect();
 		};
 	});
