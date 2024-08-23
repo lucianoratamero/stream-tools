@@ -1,0 +1,82 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
+
+	interface Artist {
+		url: string;
+		name: string;
+		image: Image[];
+		mbid: string;
+	}
+
+	interface Image {
+		size: string;
+		'#text': string;
+	}
+
+	interface Album {
+		mbid: string;
+		'#text': string;
+	}
+
+	interface Track {
+		artist: Artist;
+		mbid: string;
+		name: string;
+		image: Image[];
+		streamable: string;
+		album: Album;
+		url: string;
+		'@attr': {
+			nowplaying: string;
+		};
+		loved: string;
+	}
+
+	let show_error = $state(false);
+	let data: Promise<any> | null = $state(null);
+	let formatted_data: any = $derived.by(() => {
+		if (data === null) return null;
+
+		const track: Track = data.recenttracks.track.find((track: any) => track['@attr']?.nowplaying === 'true');
+		if (!track) return null;
+
+		return {
+			artist: track.artist.name,
+			track: track.name,
+			album: track.album['#text'],
+			image: track.image.find((image: Image) => image.size === 'medium')?.['#text']
+		};
+	});
+
+	const get_url = (api_key: string, username: string) =>
+		`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&extended=true&api_key=${api_key}&limit=1&user=${username}`;
+
+	const get_now_playing = async (api_key: string, username: string) => {
+		const response = await fetch(get_url(api_key, username));
+		data = await response.json();
+	};
+
+	onMount(async () => {
+		const api_key = $page.url.searchParams.get('api_key');
+		const username = $page.url.searchParams.get('username');
+
+		if (!api_key || !username) {
+			show_error = true;
+			return;
+		}
+		await get_now_playing(api_key, username);
+	});
+</script>
+
+
+{#if show_error}
+	<h1>Please pass the api_key and username search parameters</h1>
+{/if}
+
+{#if formatted_data}
+	<img src="{formatted_data.image}" alt="{formatted_data.track} by {formatted_data.artist}" />
+	<h1>{formatted_data.track}</h1>
+	<h2>{formatted_data.artist}</h2>
+	<h3>{formatted_data.album}</h3>
+{/if}
