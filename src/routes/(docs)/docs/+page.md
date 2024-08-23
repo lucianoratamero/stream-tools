@@ -56,6 +56,20 @@ this page gives you the tools to create your own color palettes.
 
 this page allows you to view the previously selected color palettes. useful for when you find a palette you really like, but you forgot to bookmark.
 
+### lastfm now playing
+
+this page shows the currently playing song on last.fm. it's a simple page that uses the last.fm API to show the song in real-time.
+
+if you don't know last.fm, it's compatible with all major music players, and it's a great way to keep track of what you're listening to.
+
+#### paths
+
+##### `/lastfm-now-playing/`
+
+this page accepts a `username` search parameter, that is the last.fm username you want to watch the currently playing song from.
+
+you also will need an `api_key` search parameter. to get one, you need to create an account on last.fm and then go to [this page](https://www.last.fm/api/account/create).
+
 ### twitch chat
 
 this page shows the twitch chat. it's a simple page that uses the twitch chat API to show the chat in real-time.
