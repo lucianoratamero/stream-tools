@@ -35,6 +35,8 @@
 
 	let show_error = $state(false);
 	let data: Promise<any> | null = $state(null);
+	let interval: number | null = $state(null);
+
 	let formatted_data: any = $derived.by(() => {
 		if (data === null) return null;
 
@@ -57,7 +59,7 @@
 		data = await response.json();
 	};
 
-	onMount(async () => {
+	onMount(() => {
 		const api_key = $page.url.searchParams.get('api_key');
 		const username = $page.url.searchParams.get('username');
 
@@ -65,7 +67,17 @@
 			show_error = true;
 			return;
 		}
-		await get_now_playing(api_key, username);
+		get_now_playing(api_key, username);
+
+		interval = setInterval(async () => {
+			get_now_playing(api_key, username);
+		}, 5000);
+
+		return () => {
+			if (interval) {
+				clearInterval(interval);
+			}
+		};
 	});
 </script>
 
