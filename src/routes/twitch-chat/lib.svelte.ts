@@ -211,7 +211,8 @@ export function processPronouns(
 	message: string,
 	user: string,
 	extra: OnMessageExtra & {
-		badges: Record<string, any>;
+		badges: OnMessageExtra['userBadges'];
+		emotes: OnMessageExtra['messageEmotes'];
 	}
 ) {
 	let pronounFilter = pronounCache.filter(function (x: { name: string }) {
@@ -242,7 +243,10 @@ export function processPronouns(
 function processMessage(
 	message: string,
 	user: string,
-	extra: OnMessageExtra & { badges: Record<string, any> }
+	extra: OnMessageExtra & {
+		badges: OnMessageExtra['userBadges'];
+		emotes: OnMessageExtra['messageEmotes'];
+	}
 ) {
 	// Looks for popular chatbots and filters them out
 	if (
@@ -453,11 +457,11 @@ function processMessage(
 
 		let emotes;
 		// Converts message text into emote pictures
-		if (!extra.messageEmotes || Object.keys(extra.messageEmotes).length === 0) {
+		if (!extra.emotes || Object.keys(extra.emotes).length === 0) {
 			emotes = message;
 		} else {
-			let vals = Object.values(extra.messageEmotes);
-			let keys = Object.keys(extra.messageEmotes);
+			let vals = Object.values(extra.emotes);
+			let keys = Object.keys(extra.emotes);
 
 			let Namote: Record<string, any> = {};
 			let emotestring = '';
@@ -569,6 +573,7 @@ function processMessage(
 			message: String(message),
 			processed: String(chat)
 		};
+		id = id + 1;
 		collection.messages.push(item);
 
 		if (screen_time) {
