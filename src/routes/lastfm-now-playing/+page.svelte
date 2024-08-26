@@ -87,12 +87,12 @@
 {/if}
 
 {#if formatted_data}
-	<div class="flex items-center text-lg gap-4 p-4 bg-slate-800 text-white bg-opacity-80 rounded-xl w-[400px]">
-		<img class="h-24 w-24" src="{formatted_data.image}" alt="{formatted_data.track} by {formatted_data.artist}" />
+	<div class="flex items-center text-2xl gap-4 p-4 bg-blue-950 text-white bg-opacity-90 rounded-xl w-[400px]">
+		<img class="h-24 w-24 rounded" src="{formatted_data.image}"
+				 alt="{formatted_data.track} by {formatted_data.artist}" />
 		<div class="flex flex-col justify-center overflow-hidden">
 			<h1 class="font-bold whitespace-nowrap overflow-hidden overflow-ellipsis">{formatted_data.track}</h1>
 			<h2 class="whitespace-nowrap overflow-hidden overflow-ellipsis">{formatted_data.artist}</h2>
-			<h3 class="whitespace-nowrap overflow-hidden overflow-ellipsis">{formatted_data.album}</h3>
 		</div>
 	</div>
 {/if}
