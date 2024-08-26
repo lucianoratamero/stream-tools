@@ -35,7 +35,7 @@
 		const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 		// reset the client every 3 minutes to prevent timeouts
-		const timeout = setTimeout(async () => {
+		const timeout = setInterval(async () => {
 			console.log('resetting client');
 			tmi_client.disconnect();
 			sleep(10); // just enough time to disconnect
