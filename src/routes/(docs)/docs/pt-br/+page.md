@@ -134,6 +134,11 @@ o cronômetro aceita dois parâmetros de busca: `timeInSeconds` e `noAudio`.
 
 `noAudio` desativa o alerta sonoro no final do cronômetro.
 
+além disso, você pode usar o timer para efeitos sonoros. para fazer isso, você precisa passar o parâmetro de busca `invisible`. isso tornará o timer invisível, mas ele ainda tocará o efeito sonoro.
+
+atualmente, temos dois efeitos sonoros embutidos: `toctoc` e `pipe`. você pode usá-los passando o parâmetro de busca `audio` (por exemplo, `audio=pipe`).
+
+se você quiser tocar um vídeo do YouTube em vez disso, pode passar uma URL normal do YouTube como o parâmetro de busca `video`.
 exemplo: [https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6](https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6)
 
 

@@ -137,6 +137,12 @@ the timer accepts two search params: `timeInSeconds` and `noAudio`.
 
 `noAudio` disables the alert at the end of the timer.
 
+also, you may use the timer for sound effects. to do that, you need to pass the `invisible` search param. this will make the timer invisible, but it will still play the sound effect.
+
+currently, we have two built-in sound effects: `toctoc` and `pipe`. you can use them by passing the `audio` search param (for example, `audio=pipe`).
+
+if you want to play a youtube video instead, you can pass a normal youtube URL as the `video` search param.
+
 example: [https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6](https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6)
 
 
