@@ -211,6 +211,7 @@ export function processPronouns(
 	message: string,
 	user: string,
 	extra: OnMessageExtra & {
+		color: OnMessageExtra['userColor'];
 		badges: OnMessageExtra['userBadges'];
 		emotes: OnMessageExtra['messageEmotes'];
 	}
@@ -244,6 +245,7 @@ function processMessage(
 	message: string,
 	user: string,
 	extra: OnMessageExtra & {
+		color: OnMessageExtra['userColor'];
 		badges: OnMessageExtra['userBadges'];
 		emotes: OnMessageExtra['messageEmotes'];
 	}
@@ -261,10 +263,10 @@ function processMessage(
 	else {
 		//Colors the username the same color as on Twitch
 		let color;
-		if (extra.userColor == null) {
+		if (extra.color == null) {
 			color = '#6441A4';
 		} else {
-			color = extra.userColor;
+			color = extra.color;
 		}
 		let usercolor = '<span class="username" style="color:' + color + '">' + user + '</span>';
 
