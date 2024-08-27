@@ -8,6 +8,7 @@
 	let countdown_time: number | undefined = $state();
 	let no_audio = $state(false);
 	let show_timer = $state(false);
+	let invisible_timer = $state(false);
 	let show_error = $state();
 	let formatted_time = $derived.by(() => formatTime(countdown_time));
 
@@ -35,6 +36,10 @@
 			no_audio = true;
 		}
 
+		if (searchParams.has('invisible')) {
+			invisible_timer = true;
+		}
+
 		countdown_time = Number(searchParams.get('timeInSeconds'));
 		show_error =
 			!Number(searchParams?.get('timeInSeconds')) ||
@@ -58,7 +63,7 @@
 </svelte:head>
 
 {#if show_timer}
-	<div class="flex h-screen flex-col items-center justify-center text-white">
+	<div class="flex h-screen flex-col items-center justify-center text-white" class:opacity-0={invisible_timer}>
 		<div class="relative rounded-sm bg-slate-600 bg-opacity-20 px-6 py-3 tabular-nums">
 			{#if show_error}
 				<p>Invalid time</p>
