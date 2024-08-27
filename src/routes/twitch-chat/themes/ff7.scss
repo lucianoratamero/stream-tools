@@ -2,8 +2,9 @@
 
 #chat.ff7 {
 	@apply gap-2;
-	
+
 	& .message {
+		font-size: 1.2rem;
 		border: solid 1px #424542;
 		box-shadow: 1px 1px #e7dfe7,
 		-1px -1px #e7dfe7,
