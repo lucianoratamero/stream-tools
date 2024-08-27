@@ -1,0 +1,25 @@
+// https://codepen.io/Kaizzo/pen/aGWwMM
+
+#chat.ff7 {
+	@apply gap-2;
+	
+	& .message {
+		border: solid 1px #424542;
+		box-shadow: 1px 1px #e7dfe7,
+		-1px -1px #e7dfe7,
+		1px -1px #e7dfe7,
+		-1px 1px #e7dfe7,
+		0 -2px #9c9a9c,
+		-2px 0 #7b757b,
+		0 2px #424542;
+		padding: 5px 10px;
+
+		background: #04009d;
+		background: linear-gradient(to bottom, #04009d 0%, #06004d 100%);
+		border-radius: 7px;
+		color: #eff1ff;
+		text-shadow: 2px 2px #212421,
+		1px 1px #212021;
+		font-family: Verdana, sans-serif;
+	}
+}

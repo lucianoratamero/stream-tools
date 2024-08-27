@@ -4,6 +4,7 @@
 	import { collection, init } from './lib.svelte';
 	import './themes/base.scss';
 	import './themes/pixel.scss';
+	import './themes/ff7.scss';
 
 	let error = $state(false);
 	let tmi_client: any = $state();
