@@ -358,7 +358,7 @@ function processMessage(
 						'https://static-cdn.jtvnw.net/badges/v1/b8c76744-c7e9-44be-90d0-08840a8f6e39/1'
 					];
 					for (let j = 0; j < GiftAmount.length; j++) {
-						if (extra.userBadges['sub-gifter'] == GiftAmount[j]) {
+						if (extra.badges['sub-gifter'] == GiftAmount[j]) {
 							usercolor = '<img src="' + GiftedLinks[j] + '">' + usercolor;
 							break;
 						}
@@ -406,7 +406,7 @@ function processMessage(
 						'https://static-cdn.jtvnw.net/badges/v1/494d1c8e-c3b2-4d88-8528-baff57c9bd3f/1'
 					];
 					for (let j = 0; j < BitsAmount.length; j++) {
-						if (extra.userBadges.bits == BitsAmount[j]) {
+						if (extra.badges.bits == BitsAmount[j]) {
 							usercolor = '<img src="' + BitLinks[j] + '">' + usercolor;
 							break;
 						}
