@@ -77,7 +77,7 @@ you also will need an `api_key` search parameter. to get one, you need to create
 
 this page shows the twitch chat. it's a simple page that uses the twitch chat API to show the chat in real-time.
 
-there is only one available theme (`pixel`), but, if you want more, you can change the theme by editing the `src/routes/twitch-chat/TwitchChat.svelte` file. I'll be adding more themes soon.
+there are two available themes (`pixel`, `ff7`), but, if you want more, you can change the theme by editing the `src/routes/twitch-chat/TwitchChat.svelte` file. I'll be adding more themes soon.
 
 #### paths
 

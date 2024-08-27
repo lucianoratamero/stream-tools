@@ -74,7 +74,7 @@ você também precisará de um parâmetro de busca `api_key`. para obter uma api
 
 esta página mostra o chat da Twitch. é uma página simples que usa a API do chat da Twitch para mostrar o chat em tempo real.
 
-há apenas um tema disponível (`pixel`), mas, se você quiser mais, pode alterar o tema editando o arquivo `src/routes/twitch-chat/TwitchChat.svelte`. estarei adicionando mais temas em breve.
+há apenas dois temas disponíveis (`pixel`, `ff7`), mas, se você quiser mais, pode alterar o tema editando o arquivo `src/routes/twitch-chat/TwitchChat.svelte`. estarei adicionando mais temas em breve.
 
 #### caminhos
 
