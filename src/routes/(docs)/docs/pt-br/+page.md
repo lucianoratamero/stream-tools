@@ -46,7 +46,7 @@ esta página também aceita um parâmetro de busca `numberOfCircles`, que altera
 
 também aceita um parâmetro de busca `transparentBg`, que torna o fundo transparente.
 
-exemplo: [https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=1.5](https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=1.5)
+exemplo: [https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=0.6](https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=0.6)
 
 ##### `/bokeh/create/`
 
@@ -118,7 +118,7 @@ exemplo: [https://lucianoratamero.github.io/stream-tools/effects/?confetti](http
 
 este é o mesmo efeito do caminho `/bokeh` (na verdade, ele carrega um iframe). aceita as mesmas opções de parâmetros de busca que `/bokeh`.
 
-exemplo: [https://lucianoratamero.github.io/stream-tools/effects/?bokeh&bookmark=dark-pink&decay=1.5](https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=1.5)
+exemplo: [https://lucianoratamero.github.io/stream-tools/effects/?bokeh&bookmark=dark-pink&decay=0.6](https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=0.6)
 
 ### timer
 
