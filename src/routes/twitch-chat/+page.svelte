@@ -7,7 +7,7 @@
 	import './themes/ff7.scss';
 
 	let error = $state(false);
-	let tmi_client: any = $state();
+	let tmi_client_list: any[] = $state([]);
 	let theme: string | null | undefined = $state();
 	let align: string | undefined = $state();
 
@@ -31,21 +31,21 @@
 		}
 
 		let { client } = init({ channel, twitch_id, message_screen_time });
-		tmi_client = client;
+		tmi_client_list.push(client);
 
 		const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 		// reset the client every 3 minutes to prevent timeouts
 		const timeout = setInterval(async () => {
 			console.log('resetting client');
-			tmi_client.disconnect();
+			tmi_client_list.forEach(c => c.disconnect());
 			sleep(10); // just enough time to disconnect
 			let { client } = init({ channel, twitch_id, message_screen_time });
-			tmi_client = client;
+			tmi_client_list.push(client);
 		}, 1000 * 60 * 3);
 
 		return () => {
-			tmi_client.disconnect();
+			tmi_client_list.forEach(c => c.disconnect());
 			clearTimeout(timeout);
 		};
 	});
