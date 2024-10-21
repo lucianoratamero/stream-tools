@@ -1,3 +1,4 @@
+@use "sass:color";
 canvas {
 	position: absolute;
 	left: 0;
@@ -75,14 +76,14 @@ $screen-background: #121010;
 	@include fill;
 	z-index: 9999;
 	background: linear-gradient(
-			transparentize($screen-background, 1) 50%,
-			transparentize(darken($screen-background, 10), 0.75) 50%
+			color.adjust($screen-background, $alpha: -1) 50%,
+			color.adjust(color.adjust($screen-background, $lightness: -10), $alpha: -0.75) 50%
 		),
 		linear-gradient(
 			90deg,
-			transparentize(#ff0000, 0.94),
-			transparentize(#00ff00, 0.98),
-			transparentize(#0000ff, 0.94)
+			color.adjust(#ff0000, $alpha: -0.94),
+			color.adjust(#00ff00, $alpha: -0.98),
+			color.adjust(#0000ff, $alpha: -0.94)
 		);
 	background-size:
 		100% 2px,

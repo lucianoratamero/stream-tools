@@ -7,8 +7,6 @@
 	import * as Card from '$lib/components/ui/card/index.js';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
-	import { Trash } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { isEqual } from 'lodash-es';
 	import colorPalettes from 'nice-color-palettes/1000.json';
 	import { onMount } from 'svelte';
@@ -24,7 +22,7 @@
 	let numberOfCircles = $state(0);
 
 	const changePallette = () => {
-		colorPalette = colorPalettes[Math.floor(Math.random() * 1000)];
+		colorPalette = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
 		placeholderName = '';
 	};
 
@@ -119,7 +117,9 @@
 				isPlaceholder
 				palette={colorPalette}
 				bind:name={placeholderName}
-				i={colorPalettes.findIndex((p) => JSON.stringify(p) === JSON.stringify(colorPalette))}
+				i={colorPalettes.findIndex(
+					(p: string[]) => JSON.stringify(p) === JSON.stringify(colorPalette)
+				)}
 				{colorPalettes}
 				bind:history
 				bind:bookmarks
@@ -144,7 +144,7 @@
 							title="Remove bookmark"
 							onclick={() => (bookmarks = bookmarks.filter((item) => item.name !== name))}
 						>
-							<Icon src={Trash} class="h-4 w-4" />
+							<iconify-icon height="1.5rem" icon="mdi:trash-outline"></iconify-icon>
 						</Button>
 					</span>
 				{:else}

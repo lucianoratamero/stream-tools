@@ -145,8 +145,8 @@ exemplo: [https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6]
 ## Desenvolvendo/Contribuindo
 
 ```bash
-# instalar dependências - enquanto o svelte 5 não é lançado, precisamos forçar a instalação
-npm install --force
+# instalar dependências
+npm install
 # iniciar o servidor de desenvolvimento
 npm run dev
 # construir para produção
