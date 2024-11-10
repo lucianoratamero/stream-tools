@@ -119,7 +119,7 @@
 			{/if}
 			{#if newColorPalette}
 				<div class="mt-4 rounded border p-4">
-					<div class="flex gap-2 justify-between">
+					<div class="flex justify-between gap-2">
 						<Input
 							pattern="^[a-z0-9]+(?:-[a-z0-9]+)*$"
 							placeholder="Name"
@@ -141,9 +141,12 @@
 							</Button>
 						{/key}
 					</div>
-					<div class="grid h-24 w-full grid-cols-5 gap-2 pt-2">
+					<div class="grid w-full grid-cols-5 gap-2 pt-2">
 						{#each newColorPalette as _, i}
-							<Input type="color" class="h-full w-full" bind:value={newColorPalette[i]} />
+							<div class="flex flex-col gap-1">
+								<Input type="color" class="min-h-20" bind:value={newColorPalette[i]} />
+								<Input type="text" class="w-full" bind:value={newColorPalette[i]} />
+							</div>
 						{/each}
 					</div>
 				</div>
