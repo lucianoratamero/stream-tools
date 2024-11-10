@@ -32,6 +32,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>stream-tools - bokeh - create</title>
+</svelte:head>
+
 <main class="grid h-screen grid-cols-2 gap-4 bg-white p-4">
 	<div class="relative max-h-full overflow-hidden rounded shadow-lg">
 		{#key newColorPalette}
@@ -46,7 +50,7 @@
 	</div>
 	<div class="relative flex max-h-full flex-col gap-8 overflow-y-auto rounded border p-4 shadow-lg">
 		<section>
-			<h2 class="mb-2 text-2xl font-bold">Palette</h2>
+				<h1 class="mb-2 text-2xl font-bold">Palette</h1>
 			{#if !startFrom}
 				<div class="flex gap-2">
 					<Button class="grow" onclick={() => (startFrom = 'id')}>Start from palette</Button>
