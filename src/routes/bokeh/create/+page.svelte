@@ -17,6 +17,11 @@
 
 	let slugRegex = new RegExp('^[a-z0-9]+(?:-[a-z0-9]+)*$');
 
+	let bookmarkSelectIsOpen = $state(false);
+	function toggleBookmarkSelect() {
+		bookmarkSelectIsOpen = !bookmarkSelectIsOpen;
+	}
+
 	onMount(() => {
 		bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
 	});
@@ -115,12 +120,41 @@
 						>
 							&lt; Back
 						</Button>
-						<select class="rounded border p-1" bind:value={selectedBookmark}>
-							<option class="text-black" value="">Select a bookmark</option>
-							{#each bookmarks as { name }, i}
-								<option class="text-black" value={i}>{name}</option>
-							{/each}
-						</select>
+						<div class="relative">
+							<Button onclick={toggleBookmarkSelect}>
+								{#if !selectedBookmark}
+									Select a bookmark
+								{:else}
+									Selected: {bookmarks[parseInt(selectedBookmark)].name}
+								{/if}
+							</Button>
+
+							<div
+								class="absolute right-0 top-full z-10 mt-2 flex max-h-64 flex-col gap-2 overflow-y-scroll rounded border bg-white p-2"
+								class:hidden={!bookmarkSelectIsOpen}
+							>
+								{#each bookmarks as bookmark, i}
+									<Button
+										variant="outline"
+										class="flex h-auto flex-col p-2"
+										onclick={() => {
+											selectedBookmark = i.toString();
+											toggleBookmarkSelect();
+										}}
+									>
+										<div class="flex justify-between gap-2">
+											{#each bookmark.colorPalette as color}
+												<span
+													class="inline-block h-4 w-4 rounded-full"
+													style="background-color: {color}"
+												></span>
+											{/each}
+										</div>
+										<p class="text-sm text-gray-500">{bookmark.name}</p>
+									</Button>
+								{/each}
+							</div>
+						</div>
 					</div>
 				</div>
 			{/if}
