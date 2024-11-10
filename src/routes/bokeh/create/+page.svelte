@@ -141,7 +141,7 @@
 										colorPalette: newColorPalette as string[],
 										name: newColorPaletteName as string
 									});
-									goto(`${base}/?bookmark=${newColorPaletteName}`);
+									goto(`${base}/bokeh/?bookmark=${newColorPaletteName}`);
 								}}
 							>
 								Save to bookmarks
