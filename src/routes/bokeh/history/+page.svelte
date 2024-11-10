@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import BokehPage from '$lib/components/BokehPage.svelte';
 	import PaletteCard from '$lib/components/PaletteCard.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
@@ -34,6 +35,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>stream-tools - bokeh - history</title>
+</svelte:head>
+
 <main class="grid h-screen grid-cols-2 gap-4 bg-white p-4">
 	<div class="relative max-h-full overflow-hidden rounded shadow-lg">
 		{#key colorPalette}
@@ -44,7 +49,10 @@
 	</div>
 	<div class="relative flex max-h-full flex-col gap-8 overflow-y-auto rounded border p-4 shadow-lg">
 		<section>
-			<h2 class="text-2xl font-bold">Bookmarks</h2>
+			<div class="flex items-center justify-between">
+				<h1 class="mb-2 text-2xl font-bold">Bookmarks</h1>
+				<a href={`${base}/bokeh`} class="text-blue-500"> Back to bokeh </a>
+			</div>
 			<div class="mt-2 flex flex-col-reverse gap-2">
 				{#each bookmarks as { colorPalette: palette, name }, i}
 					<PaletteCard
