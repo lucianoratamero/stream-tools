@@ -50,7 +50,10 @@
 	</div>
 	<div class="relative flex max-h-full flex-col gap-8 overflow-y-auto rounded border p-4 shadow-lg">
 		<section>
+			<div class="flex items-center justify-between">
 				<h1 class="mb-2 text-2xl font-bold">Palette</h1>
+				<a href={`${base}/bokeh`} class="text-blue-500">Back to bokeh</a>
+			</div>
 			{#if !startFrom}
 				<div class="flex gap-2">
 					<Button class="grow" onclick={() => (startFrom = 'id')}>Start from palette</Button>
