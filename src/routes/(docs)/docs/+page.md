@@ -123,6 +123,12 @@ this is the same effect as the `/bokeh` path (in fact, it loads an iframe). it a
 
 example: [https://lucianoratamero.github.io/stream-tools/effects/?bokeh&bookmark=dark-pink&decay=0.6](https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=0.6)
 
+###### `raindrops`
+
+this effect renders raindrops on your screen. that's it. literally the same as the `/effects/raindrops` page.
+
+example: [https://lucianoratamero.github.io/stream-tools/effects/?raindrops](https://lucianoratamero.github.io/stream-tools/effects/?raindrops)
+
 ### timer
 
 this page gives you a countdown timer. by default, it also makes a sound effect when the countdown is done (it may spook you, but you can disable it :3).

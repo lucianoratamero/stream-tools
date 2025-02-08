@@ -17,6 +17,7 @@
 	let crt_open_gui = $state(false);
 
 	let confetti_effect_enabled = $state(false);
+	let raindrops_effect_enabled = $state(false);
 
 	let bokeh_effect_enabled = $state(false);
 	let bokeh_options: {
@@ -39,6 +40,9 @@
 		}
 		if (search_params.has('confetti')) {
 			confetti_effect_enabled = true;
+		}
+		if (search_params.has('raindrops')) {
+			raindrops_effect_enabled = true;
 		}
 		if (search_params.has('bokeh')) {
 			bokeh_effect_enabled = true;
@@ -114,6 +118,14 @@
 	<iframe
 		title="bokeh"
 		src={`${base}/bokeh?${bokeh_options_string}`}
+		class="fixed h-full w-full bg-cover"
+	></iframe>
+{/if}
+
+{#if raindrops_effect_enabled}
+	<iframe
+		title="raindrops"
+		src={`${base}/effects/raindrops`}
 		class="fixed h-full w-full bg-cover"
 	></iframe>
 {/if}

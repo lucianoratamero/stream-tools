@@ -120,6 +120,12 @@ este é o mesmo efeito do caminho `/bokeh` (na verdade, ele carrega um iframe). 
 
 exemplo: [https://lucianoratamero.github.io/stream-tools/effects/?bokeh&bookmark=dark-pink&decay=0.6](https://lucianoratamero.github.io/stream-tools/bokeh/?bookmark=dark-pink&decay=0.6)
 
+###### `raindrops`
+
+este efeito renderiza gotas de chuva na sua tela. só isso. literalmente o mesmo que a página `/effects/raindrops`.
+
+exemplo: [https://lucianoratamero.github.io/stream-tools/effects/?raindrops](https://lucianoratamero.github.io/stream-tools/effects/?raindrops)
+
 ### timer
 
 esta página oferece um cronômetro regressivo. por padrão, também emite um efeito sonoro quando a contagem regressiva termina (pode assustar você, mas você pode desativá-lo :3).
