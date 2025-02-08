@@ -15,7 +15,14 @@
 
 <ButtonPrimitive.Root
 	{builders}
-	class={`${cn(buttonVariants({ variant, size, className }))} transition-all`}
+	class={`${cn(
+		buttonVariants({
+			variant,
+			size,
+			// @ts-ignore
+			className
+		})
+	)} transition-all`}
 	type="button"
 	{...$$restProps}
 	on:click
