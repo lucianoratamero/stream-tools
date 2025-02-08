@@ -76,7 +76,7 @@ $screen-background: #121010;
 	z-index: 9999;
 	background: linear-gradient(
 			color.adjust($screen-background, $alpha: -1) 50%,
-			color.adjust(color.adjust($screen-background, $lightness: -10), $alpha: -0.75) 50%
+			color.adjust(color.adjust($screen-background, $blackness: 10%), $alpha: -0.75) 50%
 		),
 		linear-gradient(
 			90deg,
