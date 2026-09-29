@@ -111,3 +111,9 @@
 .prose h6::before {
 	content: '###### ';
 }
+
+@media (width >= 768px) {
+	.prose :where(h2, h3, h4, h5, h6) {
+		scroll-margin-top: 8.5rem;
+	}
+}
