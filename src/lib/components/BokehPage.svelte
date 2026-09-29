@@ -34,6 +34,7 @@
 		isWrapped
 	}: Props = $props();
 	let currentNodes: Node[] = $state([]);
+	// svelte-ignore state_referenced_locally
 	let numberOfNodes = $state(numberOfCircles || 0);
 	let canvas: HTMLCanvasElement | null = $state(null);
 	let windowSize: { width: number; height: number } | undefined = $state();

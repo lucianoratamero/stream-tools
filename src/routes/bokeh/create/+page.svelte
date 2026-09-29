@@ -130,7 +130,7 @@
 							</Button>
 
 							<div
-								class="absolute right-0 top-full z-10 mt-2 flex max-h-64 flex-col gap-2 overflow-y-scroll rounded border bg-white p-2"
+								class="absolute top-full right-0 z-10 mt-2 flex max-h-64 flex-col gap-2 overflow-y-scroll rounded border bg-white p-2"
 								class:hidden={!bookmarkSelectIsOpen}
 							>
 								{#each bookmarks as bookmark, i}

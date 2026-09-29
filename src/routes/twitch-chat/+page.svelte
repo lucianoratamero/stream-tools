@@ -36,16 +36,19 @@
 		const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 		// reset the client every 3 minutes to prevent timeouts
-		const timeout = setInterval(async () => {
-			console.log('resetting client');
-			tmi_client_list.forEach(c => c.disconnect());
-			sleep(10); // just enough time to disconnect
-			let { client } = init({ channel, twitch_id, message_screen_time });
-			tmi_client_list.push(client);
-		}, 1000 * 60 * 3);
+		const timeout = setInterval(
+			async () => {
+				console.log('resetting client');
+				tmi_client_list.forEach((c) => c.disconnect());
+				sleep(10); // just enough time to disconnect
+				let { client } = init({ channel, twitch_id, message_screen_time });
+				tmi_client_list.push(client);
+			},
+			1000 * 60 * 3
+		);
 
 		return () => {
-			tmi_client_list.forEach(c => c.disconnect());
+			tmi_client_list.forEach((c) => c.disconnect());
 			clearTimeout(timeout);
 		};
 	});

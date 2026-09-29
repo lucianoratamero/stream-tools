@@ -1,13 +1,14 @@
 // from https://github.com/NigelOToole/pixel-borders
 
 @use '$lib/css/pixel-mixins';
+@reference '../../../lib/app.css';
 
 @font-face {
-	font-family: 'Pixeloid Mono';
 	font-style: normal;
 	font-weight: 400;
-	font-display: swap;
 	src: url('$lib/fonts/PixeloidMono.ttf') format('truetype');
+	font-family: 'Pixeloid Mono';
+	font-display: swap;
 }
 
 #chat.pixel {

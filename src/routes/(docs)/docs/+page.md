@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>stream-tools: docs</title>
+<title>stream-tools: docs</title>
 </svelte:head>
 
 <script lang="ts">
@@ -27,7 +27,7 @@ if you have any questions, just open an issue and I'll answer it when I can :)
 
 all options for the pages are passed as search parameters. you don't really need to know what search parameters are - they are just options passed in the URL. but if you want to know more about them, you can read [this](https://en.wikipedia.org/wiki/Query_string).
 
-a good example of a search parameter is `?channel=luciano_ratamero`. this is a search parameter that tells the page to load the chat from the `luciano_ratamero` channel. if you needed to pass more options, you could do it like this: `?channel=luciano_ratamero&theme=pixel`, by adding a `&` character before each one of them.
+a good example of a search parameter is `?channel=looshigooshi`. this is a search parameter that tells the page to load the chat from the `looshigooshi` channel. if you needed to pass more options, you could do it like this: `?channel=looshigooshi&theme=pixel`, by adding a `&` character before each one of them.
 
 ## pages
 
@@ -91,7 +91,7 @@ it also receives a `messageScreenTime` search parameter, that changes how long t
 
 it also receives an `align` search parameter, that changes the alignment of the chat. the available alignments are: `top`, `bottom`. defaults to `bottom`.
 
-example: [https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero&theme=pixel&messageScreenTime=6000](https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero&theme=pixel&messageScreenTime=6000)
+example: [https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=looshigooshi&theme=pixel&messageScreenTime=6000](https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=looshigooshi&theme=pixel&messageScreenTime=6000)
 
 ### effects
 
@@ -151,16 +151,17 @@ if you want to play a youtube video instead, you can pass a normal youtube URL a
 
 example: [https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6](https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6)
 
-
 ## Developing/Contributing
+
+install [`pnpm`](https://pnpm.io/) and [`nodejs`](https://nodejs.org/) (if you use `asdf`, just run `asdf install`), then:
 
 ```bash
 # install dependencies
-npm install
+pnpm install
 # start the dev server
-npm run dev
+pnpm run dev
 # build to production
-npm run build
+pnpm run build
 ```
 
 <div class="pb-24 md:p-0"></div>

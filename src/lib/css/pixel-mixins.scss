@@ -1,4 +1,3 @@
-
 @use 'sass:string';
 @use 'sass:color';
 
@@ -53,15 +52,15 @@
 	}
 
 	& {
-		border-style: solid;
 		border-width: $border-size;
+		border-style: solid;
 		border-color: $border-color;
+
+		border-image-source: url(pixel-borders-image($corner-size, $border-color));
 
 		border-image-slice: $corner-size * 2;
 		border-image-width: $corner-size;
 		border-image-outset: 0;
-
-		border-image-source: url(pixel-borders-image($corner-size, $border-color));
 	}
 
 	@if $border-inset-color {
@@ -91,13 +90,13 @@
 	}
 
 	&::after {
-		content: '';
 		position: absolute;
-		z-index: 0;
-		bottom: 0;
 		right: 0;
+		bottom: 0;
+		z-index: 0;
 		width: 100%;
 		height: 100%;
+		content: '';
 
 		@if $border-inset-sides == 'bottom-right' or $border-inset-sides == false {
 			$box-shadow: inset -#{$border-inset-size} -#{$border-inset-size} $border-inset-color-br;
@@ -129,7 +128,7 @@
 	$border-inset-color: false,
 	$border-inset-sides: false,
 	$border-inset-color-br: false,
-	$border-inset-color-tl: false,
+	$border-inset-color-tl: false
 ) {
 	$background-color-hover: color.adjust($background-color, $lightness: -5%);
 

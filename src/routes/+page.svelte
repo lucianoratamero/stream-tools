@@ -20,7 +20,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="https://twitch.tv/luciano_ratamero" target="_blank" aria-label="Twitch link">
+				<a href="https://twitch.tv/looshigooshi" target="_blank" aria-label="Twitch link">
 					<iconify-icon height="2rem" icon="mdi:twitch"></iconify-icon>
 				</a>
 			</li>

@@ -66,7 +66,7 @@
 						bind:colorPalette
 					/>
 				{:else}
-					<p class="text-gray-500 py-2 text-center">No bookmarks yet</p>
+					<p class="py-2 text-center text-gray-500">No bookmarks yet</p>
 				{/each}
 			</div>
 		</section>

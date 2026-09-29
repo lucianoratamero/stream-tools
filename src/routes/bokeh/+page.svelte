@@ -94,7 +94,7 @@
 </svelte:head>
 
 {#if showForm}
-	<Card.Root class="fixed right-4 top-4 z-10">
+	<Card.Root class="fixed top-4 right-4 z-10">
 		<Card.Header>
 			<Card.Title>Options</Card.Title>
 			<Card.Description>Click on the canvas to hide the form :]</Card.Description>
@@ -148,8 +148,8 @@
 						</Button>
 					</span>
 				{:else}
-					<div class="text-center col-span-3">
-						<p class="text-gray-500 mb-2">No bookmarks yet</p>
+					<div class="col-span-3 text-center">
+						<p class="mb-2 text-gray-500">No bookmarks yet</p>
 						<p>
 							<Button href={`${base}/bokeh/create`}>Create one</Button>
 							<span class="px-2">or</span>

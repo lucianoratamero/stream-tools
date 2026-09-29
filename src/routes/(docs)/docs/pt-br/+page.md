@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>stream-tools: docs</title>
+<title>stream-tools: docs</title>
 </svelte:head>
 
 <script lang="ts">
@@ -24,7 +24,7 @@ se você tiver alguma dúvida, basta abrir uma issue e eu responderei quando pud
 
 todas as opções para as páginas são passadas como parâmetros de busca (search params). você não precisa realmente saber o que são parâmetros de busca - eles são apenas opções passadas na URL. mas se você quiser saber mais sobre eles, pode ler [isto](https://www.cloudmarket.com.br/marketing-digital/blog/glossario/o-que-e-query-string-parte-de-uma-url-que-contem-dados-especificos-geralmente-apos-um/).
 
-um bom exemplo de um parâmetro de busca é `?channel=luciano_ratamero`. este é um parâmetro de busca que diz à página para carregar o chat do canal `luciano_ratamero`. se você precisar passar mais opções, pode fazer assim: `?channel=luciano_ratamero&theme=pixel`, adicionando um caractere `&` antes de cada um dos parâmetros.
+um bom exemplo de um parâmetro de busca é `?channel=looshigooshi`. este é um parâmetro de busca que diz à página para carregar o chat do canal `looshigooshi`. se você precisar passar mais opções, pode fazer assim: `?channel=looshigooshi&theme=pixel`, adicionando um caractere `&` antes de cada um dos parâmetros.
 
 ## páginas
 
@@ -88,7 +88,7 @@ também recebe um parâmetro de busca `messageScreenTime`, que altera o tempo qu
 
 também recebe um parâmetro de busca `align`, que altera o alinhamento do chat. os alinhamentos disponíveis são: `top`, `bottom`. o padrão é `bottom`.
 
-exemplo: [https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero&theme=pixel&messageScreenTime=6000](https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=luciano_ratamero&theme=pixel&messageScreenTime=6000)
+exemplo: [https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=looshigooshi&theme=pixel&messageScreenTime=6000](https://lucianoratamero.github.io/stream-tools/twitch-chat/?channel=looshigooshi&theme=pixel&messageScreenTime=6000)
 
 ### effects
 
@@ -147,16 +147,17 @@ atualmente, temos dois efeitos sonoros embutidos: `toctoc` e `pipe`. você pode 
 se você quiser tocar um vídeo do YouTube em vez disso, pode passar uma URL normal do YouTube como o parâmetro de busca `video`.
 exemplo: [https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6](https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6)
 
-
 ## Desenvolvendo/Contribuindo
+
+instale o [`pnpm`](https://pnpm.io/) e o [`nodejs`](https://nodejs.org/) (se você usa `asdf`, só rodar `asdf install`), e:
 
 ```bash
 # instalar dependências
-npm install
+pnpm install
 # iniciar o servidor de desenvolvimento
-npm run dev
+pnpm run dev
 # construir para produção
-npm run build
+pnpm run build
 ```
 
 <div class="pb-24 md:p-0"></div>

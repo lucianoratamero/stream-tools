@@ -1,8 +1,3 @@
-
-<svelte:head>
-	<title>stream-tools: effects</title>
-</svelte:head>
-
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
@@ -96,12 +91,16 @@
 	});
 </script>
 
+<svelte:head>
+	<title>stream-tools: effects</title>
+</svelte:head>
+
 {#if crt_effect_enabled}
 	<div id="screen" bind:this={crt_root}></div>
 {/if}
 
 {#if confetti_effect_enabled}
-	<div class="absolute left-1/2 top-[-1rem] z-10">
+	<div class="absolute top-[-1rem] left-1/2 z-10">
 		<Confetti
 			size={20}
 			amount={200}
@@ -123,9 +122,6 @@
 {/if}
 
 {#if raindrops_effect_enabled}
-	<iframe
-		title="raindrops"
-		src={`${base}/effects/raindrops`}
-		class="fixed h-full w-full bg-cover"
+	<iframe title="raindrops" src={`${base}/effects/raindrops`} class="fixed h-full w-full bg-cover"
 	></iframe>
 {/if}

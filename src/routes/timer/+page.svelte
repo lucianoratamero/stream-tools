@@ -76,8 +76,11 @@
 </svelte:head>
 
 {#if show_timer}
-	<div class="flex h-screen flex-col items-center justify-center text-white" class:opacity-0={invisible_timer}>
-		<div class="relative rounded-sm bg-slate-600 bg-opacity-20 px-6 py-3 tabular-nums">
+	<div
+		class="flex h-screen flex-col items-center justify-center text-white"
+		class:opacity-0={invisible_timer}
+	>
+		<div class="bg-opacity-20 relative rounded-sm bg-slate-600 px-6 py-3 tabular-nums">
 			{#if show_error}
 				<p>Invalid time</p>
 			{:else if countdown_time && countdown_time > 0}
@@ -99,7 +102,7 @@
 					{#if video}
 						<iframe
 							title="youtube video"
-							class="absolute top-0 left-0 w-full h-full"
+							class="absolute top-0 left-0 h-full w-full"
 							src={video}
 							frameborder="0"
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -107,7 +110,7 @@
 						></iframe>
 					{/if}
 				{/if}
-				<div class="absolute left-1/2 top-[95%]">
+				<div class="absolute top-[95%] left-1/2">
 					<Confetti
 						rounded
 						x={[-1.6, 1.6]}
