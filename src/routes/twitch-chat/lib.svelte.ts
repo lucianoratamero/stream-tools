@@ -1,4 +1,5 @@
 import { type OnMessageExtra } from 'comfy.js';
+import { escape } from 'lodash-es';
 // @ts-expect-error
 import tmi from 'tmi.js';
 
@@ -268,7 +269,8 @@ function processMessage(
 		} else {
 			color = extra.color;
 		}
-		let usercolor = '<span class="username" style="color:' + color + '">' + user + '</span>';
+		let usercolor =
+			'<span class="username" style="color:' + escape(color) + '">' + escape(user) + '</span>';
 
 		if (!pronounsAPI || !pronounsAPI.length) {
 			console.log('No pronouns');
@@ -458,9 +460,11 @@ function processMessage(
 		}
 
 		let emotes;
+		// message is rendered with {@html}, so everything from chat must be escaped
+		const safeMessage = escape(message);
 		// Converts message text into emote pictures
 		if (!extra.emotes || Object.keys(extra.emotes).length === 0) {
-			emotes = message;
+			emotes = safeMessage;
 		} else {
 			let vals = Object.values(extra.emotes);
 			let keys = Object.keys(extra.emotes);
@@ -477,7 +481,8 @@ function processMessage(
 				if (matches !== null) {
 					let pos1 = matches[0];
 					let pos2 = matches[1];
-					emotetext = message.substring(Number(pos1), parseInt(pos2, 10) + 1);
+					// escaped so it still matches inside safeMessage (e.g. the `<3` emote)
+					emotetext = escape(message.substring(Number(pos1), parseInt(pos2, 10) + 1));
 				}
 				emotestring += emotetext + '|';
 				Namote[emotetext] =
@@ -490,7 +495,7 @@ function processMessage(
 			}
 
 			let emotestring2 = RegExp(escapeRegExp(newStr), 'g');
-			emotes = message.replace(emotestring2, function (matched) {
+			emotes = safeMessage.replace(emotestring2, function (matched) {
 				return Namote[matched];
 			});
 		}
