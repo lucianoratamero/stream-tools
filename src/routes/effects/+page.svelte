@@ -100,7 +100,7 @@
 {/if}
 
 {#if confetti_effect_enabled}
-	<div class="absolute top-[-1rem] left-1/2 z-10">
+	<div class="absolute -top-4 left-1/2 z-10">
 		<Confetti
 			size={20}
 			amount={200}
@@ -114,14 +114,10 @@
 {/if}
 
 {#if bokeh_effect_enabled}
-	<iframe
-		title="bokeh"
-		src={`${base}/bokeh?${bokeh_options_string}`}
-		class="fixed h-full w-full bg-cover"
+	<iframe title="bokeh" src={`${base}/bokeh?${bokeh_options_string}`} class="fixed h-full w-full"
 	></iframe>
 {/if}
 
 {#if raindrops_effect_enabled}
-	<iframe title="raindrops" src={`${base}/effects/raindrops`} class="fixed h-full w-full bg-cover"
-	></iframe>
+	<iframe title="raindrops" src={`${base}/effects/raindrops`} class="fixed h-full w-full"></iframe>
 {/if}

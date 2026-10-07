@@ -80,7 +80,7 @@
 		class="flex h-screen flex-col items-center justify-center text-white"
 		class:opacity-0={invisible_timer}
 	>
-		<div class="bg-opacity-20 relative rounded-sm bg-slate-600 px-6 py-3 tabular-nums">
+		<div class="relative rounded-sm bg-slate-600/20 px-6 py-3 tabular-nums">
 			{#if show_error}
 				<p>Invalid time</p>
 			{:else if countdown_time && countdown_time > 0}
