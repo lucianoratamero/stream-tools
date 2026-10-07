@@ -134,9 +134,11 @@ esta página oferece um cronômetro regressivo. por padrão, também emite um ef
 
 ##### `/timer/`
 
-o cronômetro aceita dois parâmetros de busca: `timeInSeconds` e `noAudio`.
+o cronômetro aceita estes parâmetros de busca: `time` (ou `timeInSeconds`) e `noAudio`.
 
-`timeInSeconds` é literalmente em quantos segundos você quer que a contagem regressiva começe.
+`time` é a duração da contagem regressiva. você pode passar segundos (`90`), `MM:SS` (`1:30`) ou `HH:MM:SS` (`1:30:00`). valores que passam do limite são normalizados, então `90:00` vira `1:30:00`. as horas só aparecem enquanto não forem zero.
+
+`timeInSeconds` é a versão antiga de `time`, e aceita os mesmos formatos.
 
 `noAudio` desativa o alerta sonoro no final do cronômetro.
 
@@ -145,7 +147,7 @@ além disso, você pode usar o timer para efeitos sonoros. para fazer isso, voc�
 atualmente, temos dois efeitos sonoros embutidos: `toctoc` e `pipe`. você pode usá-los passando o parâmetro de busca `audio` (por exemplo, `audio=pipe`).
 
 se você quiser tocar um vídeo do YouTube em vez disso, pode passar uma URL normal do YouTube como o parâmetro de busca `video`.
-exemplo: [https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6](https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6)
+exemplo: [https://lucianoratamero.github.io/stream-tools/timer/?time=0:05&video=https://www.youtube.com/watch?v=nDAfnDnT2gA](https://lucianoratamero.github.io/stream-tools/timer/?time=0:05&video=https://www.youtube.com/watch?v=nDAfnDnT2gA)
 
 ## Desenvolvendo/Contribuindo
 

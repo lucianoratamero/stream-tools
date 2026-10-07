@@ -460,7 +460,6 @@ function processMessage(
 		}
 
 		let emotes;
-		// message is rendered with {@html}, so everything from chat must be escaped
 		const safeMessage = escape(message);
 		// Converts message text into emote pictures
 		if (!extra.emotes || Object.keys(extra.emotes).length === 0) {
@@ -481,7 +480,6 @@ function processMessage(
 				if (matches !== null) {
 					let pos1 = matches[0];
 					let pos2 = matches[1];
-					// escaped so it still matches inside safeMessage (e.g. the `<3` emote)
 					emotetext = escape(message.substring(Number(pos1), parseInt(pos2, 10) + 1));
 				}
 				emotestring += emotetext + '|';

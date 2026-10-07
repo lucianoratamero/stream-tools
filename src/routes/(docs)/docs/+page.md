@@ -137,9 +137,11 @@ this page gives you a countdown timer. by default, it also makes a sound effect 
 
 ##### `/timer/`
 
-the timer accepts two search params: `timeInSeconds` and `noAudio`.
+the timer accepts these search params: `time` (or `timeInSeconds`) and `noAudio`.
 
-`timeInSeconds` is literally how many seconds you want to start the countdown with.
+`time` is how long you want the countdown to be. you can pass plain seconds (`90`), `MM:SS` (`1:30`) or `HH:MM:SS` (`1:30:00`). values that overflow are normalized, so `90:00` becomes `1:30:00`. the hours are only shown while they're not zero.
+
+`timeInSeconds` is the older version of `time`, and it accepts the same formats.
 
 `noAudio` disables the alert at the end of the timer.
 
@@ -149,7 +151,7 @@ currently, we have two built-in sound effects: `toctoc` and `pipe`. you can use 
 
 if you want to play a youtube video instead, you can pass a normal youtube URL as the `video` search param.
 
-example: [https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6](https://lucianoratamero.github.io/stream-tools/timer/?timeInSeconds=6)
+example: [https://lucianoratamero.github.io/stream-tools/timer/?time=0:05&video=https://www.youtube.com/watch?v=nDAfnDnT2gA](https://lucianoratamero.github.io/stream-tools/timer/?time=0:05&video=https://www.youtube.com/watch?v=nDAfnDnT2gA)
 
 ## Developing/Contributing
 

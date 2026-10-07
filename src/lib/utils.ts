@@ -59,6 +59,12 @@ export const get_random_from_array = <T>(arr: T[]): T => {
 	return arr[Math.floor(Math.random() * arr.length)];
 };
 
+export function parseTime(raw: string | null): number | undefined {
+	const parts = (raw ?? '').trim().split(':');
+	if (parts.length > 3 || !parts.every((part) => /^\d+$/.test(part))) return undefined;
+	return parts.reduce((total, part) => total * 60 + Number(part), 0);
+}
+
 export function range(start: number, stop?: number, step?: number): number[] {
 	if (typeof stop == 'undefined') {
 		// one param defined

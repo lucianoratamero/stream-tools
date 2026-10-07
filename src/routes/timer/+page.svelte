@@ -4,6 +4,7 @@
 	import metal_pipe_falling from '$lib/audio/metal-pipe-falling.mp3';
 	import toc_toc from '$lib/audio/toc-toc.mp3';
 	import mario_party_finish from '$lib/audio/mario-party-finish.mp3';
+	import { parseTime } from '$lib/utils';
 	import { onMount } from 'svelte';
 	import { Confetti } from 'svelte-confetti';
 
@@ -17,18 +18,15 @@
 	let formatted_time = $derived.by(() => formatTime(countdown_time));
 
 	function formatTime(time?: number) {
-		if (time === undefined) {
-			return '00:00:00';
+		if (time === undefined || time < 0) {
+			return '00:00';
 		}
 		const hours = Math.floor(time / 3600);
 		const minutes = Math.floor(time / 60) % 60;
 		const seconds = time % 60;
 
-		if (time < 0) {
-			return '00:00:00';
-		}
-
-		const formatted_time = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+		const parts = hours ? [hours, minutes, seconds] : [minutes, seconds];
+		const formatted_time = parts.map((part) => String(part).padStart(2, '0')).join(':');
 		document.title = `${formatted_time} - stream-tools: timer`;
 		return formatted_time;
 	}
@@ -53,10 +51,8 @@
 			video = `https://www.youtube.com/embed/${yt_url.searchParams.get('v') as string}?autoplay=1&amp;controls=0`;
 		}
 
-		countdown_time = Number(searchParams.get('timeInSeconds'));
-		show_error =
-			!Number(searchParams?.get('timeInSeconds')) ||
-			Number.isNaN(Number(searchParams?.get('timeInSeconds')));
+		countdown_time = parseTime(searchParams.get('time') ?? searchParams.get('timeInSeconds'));
+		show_error = !countdown_time;
 
 		const interval = setInterval(() => {
 			if (!countdown_time || countdown_time <= 0) {
