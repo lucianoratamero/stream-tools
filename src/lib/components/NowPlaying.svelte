@@ -31,11 +31,11 @@
 				<iconify-icon class="animate-spin" icon="mdi:loading" height="3rem"></iconify-icon>
 			</div>
 		{/if}
-		<div class="flex flex-col justify-center overflow-hidden">
-			<h1 class="overflow-hidden font-bold text-ellipsis whitespace-nowrap">
+		<div class="flex flex-col justify-center">
+			<h1 class="font-bold">
 				{now_playing.track}
 			</h1>
-			<h2 class="overflow-hidden text-ellipsis whitespace-nowrap">{now_playing.artist}</h2>
+			<h2>{now_playing.artist}</h2>
 		</div>
 	</div>
 {/if}
