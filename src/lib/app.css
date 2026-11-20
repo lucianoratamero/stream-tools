@@ -4,6 +4,14 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+	font-style: normal;
+	font-weight: 400;
+	src: url('./fonts/PixeloidMono.ttf') format('truetype');
+	font-family: 'Pixeloid Mono';
+	font-display: swap;
+}
+
 :root {
 	--background: 0 0% 100%;
 	--foreground: 222.2 84% 4.9%;

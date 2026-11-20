@@ -10,21 +10,57 @@
 }
 
 // Generate SVG image for pixelated corners
+@function pixel-cell($x, $y) {
+	@return 'M#{$x * 2} #{$y * 2}h2v2h-2z';
+}
+
 @function pixel-borders-image($corner-size, $color) {
 	$svg: '';
 	$svg-path: '';
 	$svg-size: $corner-size * 6;
 	$color: str-replace('' + $color, '#', '%23');
+	$n: $corner-size;
+	$last: 3 * $n - 1;
 
-	@if $corner-size == 1 {
-		$svg-path: 'M0 2h2v2H0zM2 0h2v2H2zM4 2h2v2H4zM2 4h2v2H2z';
-	} @else {
-		$svg-path: 'M2 2h2v2H2zM4 0h2v2H4zM10 4h2v2h-2zM0 4h2v2H0zM6 0h2v2H6zM8 2h2v2H8zM8 8h2v2H8zM6 10h2v2H6zM0 6h2v2H0zM10 6h2v2h-2zM4 10h2v2H4zM2 8h2v2H2z';
+	@for $i from $n to 2 * $n {
+		$svg-path: $svg-path +
+			pixel-cell($i, 0) +
+			pixel-cell($i, $last) +
+			pixel-cell(0, $i) +
+			pixel-cell($last, $i);
+	}
+
+	@for $i from 1 to $n {
+		$svg-path: $svg-path +
+			pixel-cell($i, $n - $i) +
+			pixel-cell($last - $i, $n - $i) +
+			pixel-cell($i, 2 * $n - 1 + $i) +
+			pixel-cell($last - $i, 2 * $n - 1 + $i);
 	}
 
 	$svg: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='#{$svg-size}' height='#{$svg-size}'><path d='#{$svg-path}' fill='#{$color}' /></svg>";
 
 	@return $svg;
+}
+
+// Clip the box to the outer edge of the pixelated corners
+@function pixel-clip-path($n, $b) {
+	$tl: '0 #{$n * $b}';
+	$tr: '100% #{$n * $b}';
+	$br: '100% calc(100% - #{$n * $b})';
+	$bl: '0 calc(100% - #{$n * $b})';
+
+	@for $k from 1 through $n {
+		$x: $k * $b;
+		$y1: ($n - $k + 1) * $b;
+		$y0: ($n - $k) * $b;
+		$tl: '#{$tl}, #{$x} #{$y1}, #{$x} #{$y0}';
+		$tr: 'calc(100% - #{$x}) #{$y0}, calc(100% - #{$x}) #{$y1}, #{$tr}';
+		$br: '#{$br}, calc(100% - #{$x}) calc(100% - #{$y1}), calc(100% - #{$x}) calc(100% - #{$y0})';
+		$bl: '#{$x} calc(100% - #{$y0}), #{$x} calc(100% - #{$y1}), #{$bl}';
+	}
+
+	@return string.unquote('polygon(#{$tl}, #{$tr}, #{$br}, #{$bl})');
 }
 
 // String replace function - replace `$search` with `$replace` in `$string`
@@ -45,13 +81,8 @@
 	$border-color: #000,
 	$border-inset-color: false
 ) {
-	@supports (border-image-source: none) {
-		& {
-			border-radius: ($border-size * ($corner-size + 2)) + ($corner-size * 2);
-		}
-	}
-
 	& {
+		clip-path: pixel-clip-path($corner-size, $border-size);
 		border-width: $border-size;
 		border-style: solid;
 		border-color: $border-color;

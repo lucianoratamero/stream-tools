@@ -1,15 +1,7 @@
 // from https://github.com/NigelOToole/pixel-borders
 
-@use '$lib/css/pixel-mixins';
+@use '../../../lib/css/pixel-mixins';
 @reference '../../../lib/app.css';
-
-@font-face {
-	font-style: normal;
-	font-weight: 400;
-	src: url('$lib/fonts/PixeloidMono.ttf') format('truetype');
-	font-family: 'Pixeloid Mono';
-	font-display: swap;
-}
 
 #chat.pixel {
 	@apply gap-2;
