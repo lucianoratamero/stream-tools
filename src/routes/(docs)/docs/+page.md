@@ -3,8 +3,8 @@
 </svelte:head>
 
 <script lang="ts">
-	import { base } from '$app/paths';
-	import NavLinks from '$lib/components/NavLinks.svelte';
+	import { resolve } from '$app/paths';
+	import NavLinks from '#lib/components/NavLinks.svelte';
 </script>
 
 <div
@@ -15,7 +15,7 @@
 	</nav>
 </div>
 
-<a href={`${base}/docs/pt-br/`} class="italic text-sm">também disponível em português</a>
+<a href={resolve('docs/pt-br')} class="italic text-sm">também disponível em português</a>
 
 this is a set of pages with effects that I use on my twitch streams. you don't need to redeploy the app, since they can be accessed on https://lucianoratamero.github.io/stream-tools/ and added to your OBS (or whatever you use) as a browser source.
 
@@ -72,6 +72,30 @@ if you don't know last.fm, it's compatible with all major music players, and it'
 this page accepts a `username` search parameter, that is the last.fm username you want to watch the currently playing song from.
 
 you also will need an `api_key` search parameter. to get one, you need to create an account on last.fm and then go to [this page](https://www.last.fm/api/account/create).
+
+it also accepts a `theme` search parameter. the available themes are: `pixel`.
+
+### local now playing
+
+this page shows the song currently playing on your mac. it works with anything that shows up in macOS' "now playing" controls (Apple Music, Spotify, browsers, etc), using [nowplaying-cli](https://github.com/kirtan-shah/nowplaying-cli) and a small websocket server that comes with this repo.
+
+since it reads from your own machine, you need to run the server locally:
+
+1. install nowplaying-cli: `brew install nowplaying-cli`
+2. clone this repo and install its dependencies: `pnpm install`
+3. start the server: `pnpm now_playing` (it listens on port `12000`)
+
+the card is hidden while nothing is playing or the song is paused, and shows a loading spinner while there's no album art. if the server goes down, the page tries to reconnect every 3 seconds.
+
+#### paths
+
+##### `/local-now-playing/`
+
+this page accepts a `ws-url` search parameter, that is the address of the websocket server. if the server runs on the same machine as OBS, it's `ws://localhost:12000`.
+
+it also accepts a `theme` search parameter. the available themes are: `pixel`.
+
+example: [https://lucianoratamero.github.io/stream-tools/local-now-playing/?ws-url=ws://localhost:12000&theme=pixel](https://lucianoratamero.github.io/stream-tools/local-now-playing/?ws-url=ws://localhost:12000&theme=pixel)
 
 ### twitch chat
 

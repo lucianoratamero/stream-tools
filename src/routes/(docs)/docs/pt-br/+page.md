@@ -3,7 +3,7 @@
 </svelte:head>
 
 <script lang="ts">
-	import NavLinks from '$lib/components/NavLinks.svelte';
+	import NavLinks from '#lib/components/NavLinks.svelte';
 </script>
 
 <div
@@ -69,6 +69,30 @@ se você não conhece o last.fm, ele é compatível com todos os principais apli
 esta página aceita um parâmetro de busca `username`, que é o nome de usuário do last.fm que você deseja assistir a música que está tocando atualmente.
 
 você também precisará de um parâmetro de busca `api_key`. para obter uma api key, você precisa criar uma conta no last.fm e depois ir para [esta página](https://www.last.fm/api/account/create).
+
+ela também aceita um parâmetro de busca `theme`. os temas disponíveis são: `pixel`.
+
+### local now playing
+
+esta página mostra a música que está tocando no seu mac. ela funciona com qualquer coisa que apareça nos controles de "tocando agora" do macOS (Apple Music, Spotify, navegadores, etc), usando o [nowplaying-cli](https://github.com/kirtan-shah/nowplaying-cli) e um pequeno servidor websocket que vem com este repositório.
+
+como ela lê os dados da sua própria máquina, você precisa rodar o servidor localmente:
+
+1. instale o nowplaying-cli: `brew install nowplaying-cli`
+2. clone este repositório e instale as dependências: `pnpm install`
+3. inicie o servidor: `pnpm now_playing` (ele escuta na porta `12000`)
+
+o card fica escondido enquanto nada está tocando ou a música está pausada, e mostra um spinner de carregamento enquanto não há capa do álbum. se o servidor cair, a página tenta reconectar a cada 3 segundos.
+
+#### caminhos
+
+##### `/local-now-playing/`
+
+esta página aceita um parâmetro de busca `ws-url`, que é o endereço do servidor websocket. se o servidor roda na mesma máquina que o OBS, ele é `ws://localhost:12000`.
+
+ela também aceita um parâmetro de busca `theme`. os temas disponíveis são: `pixel`.
+
+exemplo: [https://lucianoratamero.github.io/stream-tools/local-now-playing/?ws-url=ws://localhost:12000&theme=pixel](https://lucianoratamero.github.io/stream-tools/local-now-playing/?ws-url=ws://localhost:12000&theme=pixel)
 
 ### twitch chat
 
