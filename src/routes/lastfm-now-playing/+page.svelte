@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { page } from '$app/state';
+	import type { NowPlayingData } from '#lib/components/NowPlaying.svelte';
+	import NowPlaying from '#lib/components/NowPlaying.svelte';
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
 
 	interface Artist {
 		url: string;
@@ -36,14 +38,15 @@
 	let show_error = $state(false);
 	let data: { recenttracks: { track: Track[] } } | null = $state(null);
 	let interval: number | null = $state(null);
+	let theme: string | null = $state(null);
 
-	let formatted_data: any = $derived.by(() => {
-		if (data === null) return null;
+	let formatted_data: NowPlayingData | undefined = $derived.by(() => {
+		if (data === null) return undefined;
 
 		const track: Track | undefined = data.recenttracks.track.find(
 			(track: any) => track['@attr']?.nowplaying === 'true'
 		);
-		if (!track) return null;
+		if (!track) return undefined;
 
 		return {
 			artist: track.artist.name,
@@ -62,8 +65,9 @@
 	};
 
 	onMount(() => {
-		const api_key = $page.url.searchParams.get('api_key');
-		const username = $page.url.searchParams.get('username');
+		theme = page.url.searchParams.get('theme');
+		const api_key = page.url.searchParams.get('api_key');
+		const username = page.url.searchParams.get('username');
 
 		if (!api_key || !username) {
 			show_error = true;
@@ -87,18 +91,4 @@
 	<h1>Please pass the api_key and username search parameters</h1>
 {/if}
 
-{#if formatted_data}
-	<div class="flex w-[400px] items-center gap-4 rounded-xl bg-blue-950/90 p-4 text-2xl text-white">
-		<img
-			class="h-24 w-24 rounded"
-			src={formatted_data.image}
-			alt="{formatted_data.track} by {formatted_data.artist}"
-		/>
-		<div class="flex flex-col justify-center overflow-hidden">
-			<h1 class="overflow-hidden font-bold text-ellipsis whitespace-nowrap">
-				{formatted_data.track}
-			</h1>
-			<h2 class="overflow-hidden text-ellipsis whitespace-nowrap">{formatted_data.artist}</h2>
-		</div>
-	</div>
-{/if}
+<NowPlaying now_playing={formatted_data} {theme} />

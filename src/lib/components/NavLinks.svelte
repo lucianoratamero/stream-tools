@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 </script>
 
-<a href={`${base}/`}>home</a>
-<a href={`${base}/docs/`}>docs</a>
-<a href={`${base}/bokeh/?bookmark=dark-pink&decay=0.6`}>bokeh</a>
-<a href={`${base}/effects/?crt`}>effects</a>
-<a href={`${base}/lastfm-now-playing`}>lastfm now playing</a>
-<a href={`${base}/twitch-chat/?channel=looshigooshi&theme=pixel&messageScreenTime=6000`}
-	>twitch chat</a
->
-<a href={`${base}/timer/?timeInSeconds=5`}>timer</a>
+<a href={resolve('/')}>home</a>
+<a href={resolve('docs')}>docs</a>
+<a href={resolve('bokeh?bookmark=dark-pink&decay=0.6')}>bokeh</a>
+<a href={resolve('effects?crt')}>effects</a>
+<a href={resolve('lastfm-now-playing')}>lastfm now playing</a>
+<a href={resolve('twitch-chat?channel=looshigooshi&theme=pixel&messageScreenTime=6000')}>
+	twitch chat
+</a>
+<a href={resolve('timer?timeInSeconds=5')}>timer</a>

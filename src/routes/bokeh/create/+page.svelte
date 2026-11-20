@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
-	import BokehPage from '$lib/components/BokehPage.svelte';
-	import Button from '$lib/components/ui/button/button.svelte';
-	import Input from '$lib/components/ui/input/input.svelte';
+	import { resolve } from '$app/paths';
+	import BokehPage from '#lib/components/BokehPage.svelte';
+	import Button from '#lib/components/ui/button/button.svelte';
+	import Input from '#lib/components/ui/input/input.svelte';
 	import colorPalettes from 'nice-color-palettes/1000.json';
 	import { onMount } from 'svelte';
 
@@ -57,7 +57,7 @@
 		<section>
 			<div class="flex items-center justify-between">
 				<h1 class="mb-2 text-2xl font-bold">Palette</h1>
-				<a href={`${base}/bokeh`} class="text-blue-500">Back to bokeh</a>
+				<a href={resolve(`bokeh`)} class="text-blue-500">Back to bokeh</a>
 			</div>
 			{#if !startFrom}
 				<div class="flex gap-2">
@@ -175,7 +175,7 @@
 										colorPalette: newColorPalette as string[],
 										name: newColorPaletteName as string
 									});
-									goto(`${base}/bokeh/?bookmark=${newColorPaletteName}`);
+									goto(resolve(`bokeh?bookmark=${newColorPaletteName}`));
 								}}
 							>
 								Save to bookmarks

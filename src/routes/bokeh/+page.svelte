@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { base } from '$app/paths';
-	import { page } from '$app/stores';
-	import BokehPage from '$lib/components/BokehPage.svelte';
-	import PaletteCard from '$lib/components/PaletteCard.svelte';
-	import Button from '$lib/components/ui/button/button.svelte';
-	import * as Card from '$lib/components/ui/card/index.js';
-	import Input from '$lib/components/ui/input/input.svelte';
-	import Label from '$lib/components/ui/label/label.svelte';
+	import { resolve } from '$app/paths';
+	import { page } from '$app/state';
+	import BokehPage from '#lib/components/BokehPage.svelte';
+	import PaletteCard from '#lib/components/PaletteCard.svelte';
+	import Button from '#lib/components/ui/button/button.svelte';
+	import * as Card from '#lib/components/ui/card/index.js';
+	import Input from '#lib/components/ui/input/input.svelte';
+	import Label from '#lib/components/ui/label/label.svelte';
 	import { isEqual } from 'lodash-es';
 	import colorPalettes from 'nice-color-palettes/1000.json';
 	import { onMount } from 'svelte';
@@ -47,24 +47,24 @@
 		syncHistory();
 
 		bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-		if ($page.url.searchParams.has('bookmark')) {
-			const name = $page.url.searchParams.get('bookmark');
+		if (page.url.searchParams.has('bookmark')) {
+			const name = page.url.searchParams.get('bookmark');
 			if (name && bookmarks.some((bookmark) => bookmark.name === name)) {
 				colorPalette =
 					bookmarks.find((bookmark) => bookmark.name === name)?.colorPalette || colorPalette;
 			}
 		}
 
-		if ($page.url.searchParams.has('transparentBg')) {
-			transparentBg = $page.url.searchParams.get('transparentBg') !== 'false';
+		if (page.url.searchParams.has('transparentBg')) {
+			transparentBg = page.url.searchParams.get('transparentBg') !== 'false';
 		}
 
-		if ($page.url.searchParams.has('decay')) {
-			decay = Number($page.url.searchParams.get('decay') as string);
+		if (page.url.searchParams.has('decay')) {
+			decay = Number(page.url.searchParams.get('decay') as string);
 		}
 
-		if ($page.url.searchParams.has('numberOfCircles')) {
-			numberOfCircles = Number($page.url.searchParams.get('numberOfCircles') as string);
+		if (page.url.searchParams.has('numberOfCircles')) {
+			numberOfCircles = Number(page.url.searchParams.get('numberOfCircles') as string);
 		}
 	});
 
@@ -77,10 +77,10 @@
 	});
 
 	$effect(() => {
-		const bookmarkFromUrl = $page.url.searchParams.get('bookmark');
+		const bookmarkFromUrl = page.url.searchParams.get('bookmark');
 
 		if (bookmarkFromUrl) {
-			const name = $page.url.searchParams.get('bookmark');
+			const name = page.url.searchParams.get('bookmark');
 			if (name && bookmarks.some((bookmark) => bookmark.name === name)) {
 				colorPalette =
 					bookmarks.find((bookmark) => bookmark.name === name)?.colorPalette || colorPalette;
@@ -109,8 +109,8 @@
 				<Button onclick={goFullscreen}>Go fullscreen</Button>
 			</div>
 			<div class="flex gap-2">
-				<Button href={`${base}/bokeh/history`}>See history</Button>
-				<Button href={`${base}/bokeh/create`}>Create palette</Button>
+				<Button href={resolve(`bokeh/history`)}>See history</Button>
+				<Button href={resolve(`bokeh/create`)}>Create palette</Button>
 			</div>
 
 			<PaletteCard
@@ -134,7 +134,7 @@
 						<Button
 							variant="outline"
 							class="flex grow items-center justify-between gap-2 rounded-r-none border-r-0"
-							href={`${base}/bokeh?bookmark=${name}`}
+							href={resolve(`bokeh?bookmark=${name}`)}
 						>
 							{name || `Bookmark ${i + 1}`}
 						</Button>
@@ -151,9 +151,9 @@
 					<div class="col-span-3 text-center">
 						<p class="mb-2 text-gray-500">No bookmarks yet</p>
 						<p>
-							<Button href={`${base}/bokeh/create`}>Create one</Button>
+							<Button href={resolve(`bokeh/create`)}>Create one</Button>
 							<span class="px-2">or</span>
-							<Button href={`${base}/bokeh/history`}>See history</Button>
+							<Button href={resolve(`bokeh/history`)}>See history</Button>
 						</p>
 					</div>
 				{/each}

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { base } from '$app/paths';
-	import BokehPage from '$lib/components/BokehPage.svelte';
-	import PaletteCard from '$lib/components/PaletteCard.svelte';
-	import Button from '$lib/components/ui/button/button.svelte';
+	import { resolve } from '$app/paths';
+	import BokehPage from '#lib/components/BokehPage.svelte';
+	import PaletteCard from '#lib/components/PaletteCard.svelte';
+	import Button from '#lib/components/ui/button/button.svelte';
 	import colorPalettes from 'nice-color-palettes/1000.json';
 	import { onMount } from 'svelte';
 
@@ -51,7 +51,7 @@
 		<section>
 			<div class="flex items-center justify-between">
 				<h1 class="mb-2 text-2xl font-bold">Bookmarks</h1>
-				<a href={`${base}/bokeh`} class="text-blue-500"> Back to bokeh </a>
+				<a href={resolve(`bokeh`)} class="text-blue-500"> Back to bokeh </a>
 			</div>
 			<div class="mt-2 flex flex-col-reverse gap-2">
 				{#each bookmarks as { colorPalette: palette, name }, i}

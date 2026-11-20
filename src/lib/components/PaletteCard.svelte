@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Button from '$lib/components/ui/button/button.svelte';
-	import * as Card from '$lib/components/ui/card/index.js';
-	import Input from '$lib/components/ui/input/input.svelte';
+	import Button from '#lib/components/ui/button/button.svelte';
+	import * as Card from '#lib/components/ui/card/index.js';
+	import Input from '#lib/components/ui/input/input.svelte';
 
 	type BaseProps = {
 		palette: string[];

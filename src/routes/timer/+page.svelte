@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import confetti_audio from '$lib/audio/confetti.mp3';
-	import metal_pipe_falling from '$lib/audio/metal-pipe-falling.mp3';
-	import toc_toc from '$lib/audio/toc-toc.mp3';
-	import mario_party_finish from '$lib/audio/mario-party-finish.mp3';
-	import { parseTime } from '$lib/utils';
+	import { page } from '$app/state';
+	import confetti_audio from '#lib/audio/confetti.mp3';
+	import metal_pipe_falling from '#lib/audio/metal-pipe-falling.mp3';
+	import toc_toc from '#lib/audio/toc-toc.mp3';
+	import mario_party_finish from '#lib/audio/mario-party-finish.mp3';
+	import { parseTime } from '#lib/utils.ts';
 	import { onMount } from 'svelte';
 	import { Confetti } from 'svelte-confetti';
 
@@ -32,7 +32,7 @@
 	}
 
 	onMount(() => {
-		const searchParams = $page.url.searchParams;
+		const searchParams = page.url.searchParams;
 
 		if (searchParams.has('noAudio')) {
 			no_audio = true;

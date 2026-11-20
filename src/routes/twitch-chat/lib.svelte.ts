@@ -513,16 +513,13 @@ function processMessage(
 			}
 		}
 
-		// @ts-ignore
-		let FFZglobalvals = Object.values(FFZglobalemoticons.sets[3].emoticons);
-		// @ts-ignore
-		for (let i = 0; i < FFZglobalemoticons.sets[3].emoticons.length; i++) {
-			// @ts-ignore
+		let FFZglobalvals: { id: string; name: string }[] =
+			FFZglobalemoticons.sets?.[3]?.emoticons ?? [];
+		for (let i = 0; i < FFZglobalvals.length; i++) {
 			let FFZname = FFZglobalvals[i].name;
 			let re = new RegExp(`\\b${FFZname}\\b`, 'g');
 			emotes = emotes.replace(
 				re,
-				// @ts-ignore
 				'<img src="https://cdn.frankerfacez.com/emote/' + FFZglobalvals[i].id + '/1">'
 			);
 		}

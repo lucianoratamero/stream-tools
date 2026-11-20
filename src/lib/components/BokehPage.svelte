@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { emptyNode, renderFunctions, type Node } from '$lib/renderers';
+	import { browser } from '$app/env';
+	import { emptyNode, renderFunctions, type Node } from '#lib/renderers.ts';
 	import { onMount } from 'svelte';
 
 	type BaseProps = {

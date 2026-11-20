@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { range } from '$lib/utils';
+	import { browser } from '$app/env';
+	import { range } from '#lib/utils.ts';
 	import { onMount } from 'svelte';
 	import Particle from './Particle.svelte';
 

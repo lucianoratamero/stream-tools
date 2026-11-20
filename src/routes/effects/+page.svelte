@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { base } from '$app/paths';
-	import { page } from '$app/stores';
+	import { resolve } from '$app/paths';
+	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import Confetti from 'svelte-confetti';
 	import { ScreenEffect, initGUI } from './crt/index';
@@ -24,7 +24,7 @@
 	let bokeh_options_string = $derived(new URLSearchParams(bokeh_options).toString());
 
 	onMount(() => {
-		const search_params = $page.url.searchParams;
+		const search_params = page.url.searchParams;
 
 		if (search_params.has('crt')) {
 			crt_effect_enabled = true;
@@ -114,10 +114,10 @@
 {/if}
 
 {#if bokeh_effect_enabled}
-	<iframe title="bokeh" src={`${base}/bokeh?${bokeh_options_string}`} class="fixed h-full w-full"
+	<iframe title="bokeh" src={resolve(`bokeh?${bokeh_options_string}`)} class="fixed h-full w-full"
 	></iframe>
 {/if}
 
 {#if raindrops_effect_enabled}
-	<iframe title="raindrops" src={`${base}/effects/raindrops`} class="fixed h-full w-full"></iframe>
+	<iframe title="raindrops" src={resolve(`effects/raindrops`)} class="fixed h-full w-full"></iframe>
 {/if}
