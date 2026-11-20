@@ -77,11 +77,11 @@ ela também aceita um parâmetro de busca `theme`. os temas disponíveis são: `
 
 ### local now playing
 
-esta página mostra a música que está tocando no seu mac. ela funciona com qualquer coisa que apareça nos controles de "tocando agora" do macOS (Apple Music, Spotify, navegadores, etc), usando o [nowplaying-cli](https://github.com/kirtan-shah/nowplaying-cli) e um pequeno servidor websocket que vem com este repositório.
+esta página mostra a música que está tocando no seu computador, através de um pequeno servidor websocket que vem com este repositório. no macOS, ela funciona com qualquer coisa que apareça nos controles de "tocando agora" (Apple Music, Spotify, navegadores, etc), usando o [nowplaying-cli](https://github.com/kirtan-shah/nowplaying-cli). no linux, ela funciona com qualquer player MPRIS (Spotify, VLC, navegadores, etc), usando o [playerctl](https://github.com/altdesktop/playerctl).
 
 como ela lê os dados da sua própria máquina, você precisa rodar o servidor localmente:
 
-1. instale o nowplaying-cli: `brew install nowplaying-cli`
+1. no macOS, instale o nowplaying-cli (`brew install nowplaying-cli`). no linux, instale o playerctl pelo gerenciador de pacotes da sua distro
 2. clone este repositório e instale as dependências: `pnpm install`
 3. inicie o servidor: `pnpm now_playing` (ele escuta na porta `12000`)
 
@@ -91,11 +91,11 @@ o card fica escondido enquanto nada está tocando ou a música está pausada, e 
 
 ##### `/local-now-playing/`
 
-esta página aceita um parâmetro de busca `ws-url`, que é o endereço do servidor websocket. se o servidor roda na mesma máquina que o OBS, ele é `ws://localhost:12000`.
+esta página se conecta ao servidor em `ws://localhost:12000`, então ela funciona direto quando o servidor roda na mesma máquina que o OBS. se não for o caso, você pode passar o endereço do servidor no parâmetro de busca `ws-url`.
 
 ela também aceita um parâmetro de busca `theme`. os temas disponíveis são: `pixel`.
 
-exemplo: [https://lucianoratamero.github.io/stream-tools/local-now-playing/?ws-url=ws://localhost:12000&theme=pixel](https://lucianoratamero.github.io/stream-tools/local-now-playing/?ws-url=ws://localhost:12000&theme=pixel)
+exemplo: [https://lucianoratamero.github.io/stream-tools/local-now-playing/?theme=pixel](https://lucianoratamero.github.io/stream-tools/local-now-playing/?theme=pixel)
 
 ### twitch chat
 
@@ -186,6 +186,8 @@ instale o [`pnpm`](https://pnpm.io/) e o [`nodejs`](https://nodejs.org/) (se voc
 pnpm install
 # iniciar o servidor de desenvolvimento
 pnpm run dev
+# iniciar o servidor de desenvolvimento e o servidor do local now playing juntos
+pnpm run local
 # construir para produção
 pnpm run build
 ```

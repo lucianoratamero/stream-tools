@@ -77,11 +77,11 @@ it also accepts a `theme` search parameter. the available themes are: `pixel`.
 
 ### local now playing
 
-this page shows the song currently playing on your mac. it works with anything that shows up in macOS' "now playing" controls (Apple Music, Spotify, browsers, etc), using [nowplaying-cli](https://github.com/kirtan-shah/nowplaying-cli) and a small websocket server that comes with this repo.
+this page shows the song currently playing on your computer, through a small websocket server that comes with this repo. on macOS, it works with anything that shows up in the "now playing" controls (Apple Music, Spotify, browsers, etc), using [nowplaying-cli](https://github.com/kirtan-shah/nowplaying-cli). on linux, it works with any MPRIS player (Spotify, VLC, browsers, etc), using [playerctl](https://github.com/altdesktop/playerctl).
 
 since it reads from your own machine, you need to run the server locally:
 
-1. install nowplaying-cli: `brew install nowplaying-cli`
+1. on macOS, install nowplaying-cli (`brew install nowplaying-cli`). on linux, install playerctl from your distro's package manager
 2. clone this repo and install its dependencies: `pnpm install`
 3. start the server: `pnpm now_playing` (it listens on port `12000`)
 
@@ -91,11 +91,11 @@ the card is hidden while nothing is playing or the song is paused, and shows a l
 
 ##### `/local-now-playing/`
 
-this page accepts a `ws-url` search parameter, that is the address of the websocket server. if the server runs on the same machine as OBS, it's `ws://localhost:12000`.
+this page connects to the server on `ws://localhost:12000`, so it works out of the box when the server runs on the same machine as OBS. if it doesn't, you can pass the server address as the `ws-url` search parameter.
 
 it also accepts a `theme` search parameter. the available themes are: `pixel`.
 
-example: [https://lucianoratamero.github.io/stream-tools/local-now-playing/?ws-url=ws://localhost:12000&theme=pixel](https://lucianoratamero.github.io/stream-tools/local-now-playing/?ws-url=ws://localhost:12000&theme=pixel)
+example: [https://lucianoratamero.github.io/stream-tools/local-now-playing/?theme=pixel](https://lucianoratamero.github.io/stream-tools/local-now-playing/?theme=pixel)
 
 ### twitch chat
 
@@ -186,6 +186,8 @@ install [`pnpm`](https://pnpm.io/) and [`nodejs`](https://nodejs.org/) (if you u
 pnpm install
 # start the dev server
 pnpm run dev
+# start the dev server and the local now playing server together
+pnpm run local
 # build to production
 pnpm run build
 ```

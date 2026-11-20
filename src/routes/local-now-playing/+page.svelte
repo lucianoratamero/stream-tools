@@ -5,42 +5,14 @@
 	import websocketState, { type WebSocketState } from '#lib/websocket.svelte.ts';
 	import { onMount } from 'svelte';
 
-	interface RawNowPlaying {
-		kMRMediaRemoteNowPlayingInfoTitle?: string;
-		kMRMediaRemoteNowPlayingInfoArtist?: string;
-		kMRMediaRemoteNowPlayingInfoArtworkData?: string;
-		kMRMediaRemoteNowPlayingInfoArtworkMIMEType?: string;
-		kMRMediaRemoteNowPlayingInfoPlaybackRate?: number;
-	}
-
-	let webSocketData = $state<WebSocketState>(undefined);
-	let nowPlayingData: NowPlayingData | undefined = $derived.by(() => {
-		const raw: RawNowPlaying | undefined = webSocketData?.state;
-		if (
-			!raw?.kMRMediaRemoteNowPlayingInfoTitle ||
-			raw.kMRMediaRemoteNowPlayingInfoPlaybackRate === 0
-		)
-			return undefined;
-
-		const artwork = raw.kMRMediaRemoteNowPlayingInfoArtworkData;
-		const mimeType = raw.kMRMediaRemoteNowPlayingInfoArtworkMIMEType ?? 'image/jpeg';
-
-		return {
-			track: raw.kMRMediaRemoteNowPlayingInfoTitle,
-			artist: raw.kMRMediaRemoteNowPlayingInfoArtist ?? '',
-			image: artwork ? `data:${mimeType};base64,${artwork}` : undefined
-		};
-	});
-
+	let web_socket_data = $state<WebSocketState>(undefined);
+	let now_playing = $derived(web_socket_data?.state as NowPlayingData | undefined);
 	let theme = $state<string | null>(null);
 
 	onMount(() => {
 		theme = page.url.searchParams.get('theme');
-		const wsUrl = page.url.searchParams.get('ws-url');
-		if (wsUrl) {
-			webSocketData = websocketState(wsUrl);
-		}
+		web_socket_data = websocketState(page.url.searchParams.get('ws-url') ?? 'ws://localhost:12000');
 	});
 </script>
 
-<NowPlaying now_playing={nowPlayingData} {theme} />
+<NowPlaying {now_playing} {theme} />

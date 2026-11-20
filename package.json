@@ -4,7 +4,7 @@
 	"packageManager": "pnpm@12.21.0",
 	"scripts": {
 		"dev": "vite dev",
-		"now_playing": "node macNowPlayingSocket.js",
+		"now_playing": "node nowPlayingSocket.js",
 		"local": "pnpm run '/^(dev|now_playing)$/'",
 		"build": "vite build",
 		"deploy": "git checkout $1 && pnpm run build && gh-pages -d build",
