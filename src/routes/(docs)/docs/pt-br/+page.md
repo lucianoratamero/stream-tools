@@ -3,6 +3,7 @@
 </svelte:head>
 
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import NavLinks from '#lib/components/NavLinks.svelte';
 </script>
 
@@ -13,6 +14,8 @@
 		<NavLinks />
 	</nav>
 </div>
+
+<a href={resolve('docs')} class="italic text-sm">also available in english</a>
 
 esta é uma série de páginas com efeitos que eu uso nas minhas lives na Twitch. você não precisa baixar e rodar o código, porque todas as funcionalidades estão em https://lucianoratamero.github.io/stream-tools/ . só adicionar elas ao seu OBS (ou qualquer outro que você use) como uma fonte de navegador (browser source).
 
@@ -54,7 +57,7 @@ esta página oferece as ferramentas para criar suas próprias paletas de cores.
 
 ##### `/bokeh/history/`
 
-esta página permite visualizar as paletas de cores selecionadas anteriormente. útil para quando você encontra uma paleta que realmente gosta, mas esqueceu de savlar como bookmark.
+esta página permite visualizar as paletas de cores selecionadas anteriormente. útil para quando você encontra uma paleta que realmente gosta, mas esqueceu de salvar como bookmark.
 
 ### lastfm now playing
 
@@ -171,6 +174,7 @@ além disso, você pode usar o timer para efeitos sonoros. para fazer isso, voc�
 atualmente, temos dois efeitos sonoros embutidos: `toctoc` e `pipe`. você pode usá-los passando o parâmetro de busca `audio` (por exemplo, `audio=pipe`).
 
 se você quiser tocar um vídeo do YouTube em vez disso, pode passar uma URL normal do YouTube como o parâmetro de busca `video`.
+
 exemplo: [https://lucianoratamero.github.io/stream-tools/timer/?time=0:05&video=https://www.youtube.com/watch?v=nDAfnDnT2gA](https://lucianoratamero.github.io/stream-tools/timer/?time=0:05&video=https://www.youtube.com/watch?v=nDAfnDnT2gA)
 
 ## Desenvolvendo/Contribuindo
