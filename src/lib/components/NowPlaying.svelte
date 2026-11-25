@@ -13,12 +13,12 @@
 
 {#if now_playing}
 	<div
-		class="flex w-100 items-center gap-4 rounded-xl bg-blue-950/70 p-4 text-xl text-white"
+		class="inline-flex items-center gap-4 rounded-xl bg-blue-950/70 p-4 text-xl text-white"
 		class:pixel={theme === 'pixel'}
 	>
 		{#if now_playing.image}
 			<img
-				class="h-24 w-24 rounded"
+				class="h-24 rounded"
 				src={now_playing.image}
 				alt="{now_playing.track} by {now_playing.artist}"
 			/>
